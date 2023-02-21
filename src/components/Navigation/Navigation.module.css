@@ -5,11 +5,11 @@
   list-style: none;
 }
 
+.active {
+  text-decoration: none;
+  color: #212121;
+}
 .NavLink {
   text-decoration: none;
   color: #9b9faa;
-}
-.NavLink:hover,
-.NavLink:active {
-  color: #212121;
 }
