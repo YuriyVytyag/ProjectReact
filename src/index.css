@@ -1,10 +1,16 @@
 @import-normalize; /* bring in normalize.css styles */
+@font-face {
+  font-family: Verdana, sans-serif;
+  src: local('Verdana'), url(./fonts/verdana.ttf) format('truetype');
+}
+@font-face {
+  font-family: Verdana-Bold, sans-serif;
+  src: local('Verdana-Bold'), url(./fonts/verdana-bold.ttf) format('truetype');
+}
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Verdana', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

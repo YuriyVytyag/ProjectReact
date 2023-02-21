@@ -1,9 +1,9 @@
-import Modal from './Modal/Modal';
+import BasicModal from './Modal/Modal';
 
 const App = () => {
   return (
     <div>
-      <Modal />
+      <BasicModal />
     </div>
   );
 };
