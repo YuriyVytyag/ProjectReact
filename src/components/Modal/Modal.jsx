@@ -53,7 +53,7 @@ export default function BasicModal() {
           <StyledHeader id="modal-modal-title">
             Your recommended daily calorie intake is
           </StyledHeader>
-          <Calories>2800 ккал 2800 ккал</Calories>
+          <Calories>2800 ккал</Calories>
           <StyledTitle id="modal-modal-description" sx={{ mt: 2 }}>
             Foods you should not eat
           </StyledTitle>
