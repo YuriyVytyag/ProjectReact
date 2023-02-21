@@ -1,9 +1,10 @@
-import Modal from './Modal/Modal';
+// import Modal from './Modal/Modal';
+import MainPage from "pages/MainPage/MainPage";
 
 const App = () => {
   return (
     <div>
-      <Modal />
+      <MainPage/>
     </div>
   );
 };
