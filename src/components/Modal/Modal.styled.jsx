@@ -52,11 +52,30 @@ export const StyledTitle = styled(Typography)`
   padding-top: 12px;
   padding-bottom: 20px;
   border-top: 1px solid #e0e0e0;
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
 `;
 export const StyledHeader = styled.h2`
   display: flex;
   justify-content: center;
   text-align: center;
   padding: 0;
-  width: 305px;
+  width: 325px;
+
+  font-size: 26px;
+  line-height: 36px;
+  font-weight: 700;
+`;
+export const Calories = styled.p`
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 58px;
+  text-align: center;
+  letter-spacing: 0.04em;
+
+  color: #264061;
 `;

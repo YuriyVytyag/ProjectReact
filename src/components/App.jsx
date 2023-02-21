@@ -1,10 +1,14 @@
-import BasicModal from './Modal/Modal';
+// import BasicModal from './Modal/Modal';
+
+import { Route, Routes } from 'react-router';
+import Header from './Header/Header';
 
 const App = () => {
   return (
-    <div>
-      <BasicModal />
-    </div>
+    <Routes>
+      <Route path="/" element={<Header />} />
+      {/* <BasicModal /> */}
+    </Routes>
   );
 };
 
