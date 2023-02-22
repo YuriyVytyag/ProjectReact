@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Box, Modal, Typography, Button } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 
 export const Wrapper = styled(Box)`
   width: 320px;
