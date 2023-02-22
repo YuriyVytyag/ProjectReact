@@ -15,10 +15,12 @@
 // };
 
 // export default Modal;
+import CircularProgressWithLabel from '../Loader/Loader';
 
 import * as React from 'react';
 import { Box, Modal, Typography, Button } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import {
   StyledButton,
   CloseButton,
@@ -26,6 +28,8 @@ import {
   StyledHeader,
   Wrapper,
   Calories,
+  BackIcon,
+  BackBtn,
 } from './Modal.styled';
 
 const style = {
@@ -47,6 +51,12 @@ export default function BasicModal() {
         aria-describedby="modal-modal-description"
       >
         <Wrapper sx={style}>
+          <CircularProgressWithLabel />
+          <BackIcon>
+            <BackBtn type="button" onClick={handleClose}>
+              <KeyboardReturnIcon />
+            </BackBtn>
+          </BackIcon>
           <CloseButton onClick={handleClose}>
             <CloseIcon sx={{ fill: 'black' }} />
           </CloseButton>
