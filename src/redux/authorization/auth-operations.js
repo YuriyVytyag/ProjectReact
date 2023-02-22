@@ -9,7 +9,7 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
   
     try {
-      const { data } = await $api.post('auth/register', credentials);
+      const { data } = await API.post('auth/register', credentials);
       localStorage.setItem('token_moms', data.token);
       return data;
     } catch (error) {
@@ -20,7 +20,7 @@ export const register = createAsyncThunk(
 
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
-    await $api.get('auth/logout');
+    await API.get('auth/logout');
     localStorage.removeItem('token_moms');
     localStorage.removeItem('persist:auth');
    
@@ -33,7 +33,7 @@ export const logIn = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
     try {
-      const { data } = await $api.post('auth/login', credentials);
+      const { data } = await API.post('auth/login', credentials);
       localStorage.setItem('token_moms', data.token);
       return data;
     } catch (error) {
@@ -46,7 +46,7 @@ export const updateUser = createAsyncThunk(
   'user/updateUser',
   async (credentials, thunkAPI) => {
     try {
-      const { data } = await $api.patch(`users/update`, credentials);
+      const { data } = await API.patch(`users/update`, credentials);
 
       return data;
     } catch (error) {

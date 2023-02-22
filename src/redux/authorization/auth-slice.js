@@ -46,12 +46,6 @@ import {
       setUserData(state, { payload }) {
         state.userData = payload;
       },
-      setGoogleData(state, { payload }) {
-        state.user.name = payload.name;
-        state.user.email = payload.email;
-        state.token = payload.token;
-        state.isLoggedIn = true;
-      },
     },
     extraReducers: builder =>
       builder
@@ -96,5 +90,5 @@ import {
         .addMatcher(isAnyOf(rejectedActions), anyCases.handleAnyRejected),
   });
   
-  export const { setUserData, setGoogleData } = authSlice.actions;
+  export const { setUserData } = authSlice.actions;
   export default authSlice.reducer;
