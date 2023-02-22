@@ -1,3 +1,7 @@
+.logoWrapper {
+  position: relative;
+}
+
 .logo_1280,
 .logo_768 {
   display: none;
@@ -20,5 +24,14 @@
   }
   .logo_1280 {
     display: block;
+  }
+  .logoLine::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 190px;
+    width: 1px;
+    height: 32px;
+    background-color: #e0e0e0;
   }
 }

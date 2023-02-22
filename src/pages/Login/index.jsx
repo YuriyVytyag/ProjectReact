@@ -13,7 +13,7 @@ const Login = () => {
     <>
     <AuthBackground/>
     <LoginPage>
-      <TitleLogIn>{t("header.signin")}</TitleLogIn>
+      <TitleLogIn>{t("header.login")}</TitleLogIn>
       <FormLogin />
       {isLoading && <Loader />}
       </LoginPage>

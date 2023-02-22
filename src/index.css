@@ -1,10 +1,17 @@
 @import-normalize; /* bring in normalize.css styles */
+@font-face {
+  font-family: Verdana, sans-serif;
+  src: local('Verdana'), url(./fonts/verdana.ttf) format('truetype');
+}
+@font-face {
+  font-family: Verdana-Bold, sans-serif;
+  src: local('Verdana-Bold'), url(./fonts/verdana-bold.ttf) format('truetype');
+}
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Verdana', sans-serif;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -12,4 +19,45 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+ul,
+li {
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+input {
+  outline: none;
 }
