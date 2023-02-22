@@ -6,10 +6,10 @@ import Header from './Header/Header';
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Header />} />
-      {/* <BasicModal /> */}
-    </Routes>
+    // <Routes>
+    //   <Route path="/" element={<Header />} />
+    <BasicModal />
+    // </Routes>
   );
 };
 
