@@ -3,6 +3,7 @@ export const Cart = () => {
     <div>
       Cart
       <p>api</p>
+      <p>Your Cart empty</p>
     </div>
   )
 }
