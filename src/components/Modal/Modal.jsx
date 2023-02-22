@@ -18,7 +18,7 @@
 import CircularProgressWithLabel from '../Loader/Loader';
 
 import * as React from 'react';
-import { Box, Modal, Typography, Button } from '@mui/material';
+import { Modal } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import {
