@@ -1,11 +1,19 @@
+import { Route, Routes } from 'react-router';
+import Header from './Header/Header';
 // import Modal from './Modal/Modal';
-import MainPage from "pages/MainPage/MainPage";
+import MainPage from 'pages/MainPage/MainPage';
+
+
 
 const App = () => {
   return (
-    <div>
-      <MainPage/>
-    </div>
+    <Routes>
+      <Route path="/" element={<Header />} />
+      <Route index element={<MainPage />} />
+      {/* <Modal /> */}
+    </Routes>
+    
+   
   );
 };
 

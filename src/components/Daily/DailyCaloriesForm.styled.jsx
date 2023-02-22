@@ -12,6 +12,7 @@ export const FormWrapper = styled.div`
     margin-top: 140px;
   }
 `;
+
 export const Title = styled.h1`
   width: 280px;
   color: #212121;
@@ -23,6 +24,7 @@ export const Title = styled.h1`
     margin-bottom: 68px;
   }
 `;
+
 export const FormButton = styled(Button)`
   text-transform: none;
   padding: 13px 25px;
@@ -36,10 +38,12 @@ export const FormButton = styled(Button)`
     background-color: #f97619;
   }
 `;
+
 export const RadioWraper = styled.div`
   margin-top: 20px;
   margin-bottom: 30px;
 `;
+
 export const MainWrap = styled.div`
   margin-bottom: 40px;
   width: 240px;
@@ -50,17 +54,20 @@ export const MainWrap = styled.div`
     width: 100%;
   }
 `;
+
 export const LeftWrap = styled.div`
   margin-bottom: 15px;
   display: flex;
   flex-direction: column;
   gap: 15px;
 `;
+
 export const RightWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
 `;
+
 export const ButtonWrap = styled.div`
   display: flex;
   justify-content: center;
