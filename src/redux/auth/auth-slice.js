@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import authOperations from './auth-operations';
-import persistReducer from 'redux-persist/es/persistReducer';
-import storage from 'redux-persist/lib/storage';
 import { fetchStatus } from 'redux/fetchStatus';
 
 const initialState = {
