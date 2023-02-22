@@ -7,10 +7,18 @@ function Navigation() {
     <>
       <ul className={s.list}>
         <li className={s.item}>
-          <NavLink className={s.NavLink}>LOG IN</NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? s.active : s.NavLink)}
+          >
+            LOG IN
+          </NavLink>
         </li>
         <li>
-          <NavLink className={s.NavLink}>REGISTRATION</NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? s.active : s.NavLink)}
+          >
+            REGISTRATION
+          </NavLink>
         </li>
       </ul>
     </>

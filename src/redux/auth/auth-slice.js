@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import authOperations from './auth-operations';
-import persistReducer from 'redux-persist/es/persistReducer';
-import storage from 'redux-persist/lib/storage';
+// import persistReducer from 'redux-persist/es/persistReducer';
+// import storage from 'redux-persist/lib/storage';
 import { fetchStatus } from 'redux/fetchStatus';
 
 const initialState = {
@@ -11,7 +11,10 @@ const initialState = {
   sid: '',
   status: fetchStatus.idle, 
   error: '',
-  // user: {username: null, emaile: null,}
+  user: {
+    userName: '',
+    email: '',
+  },
 };
 
 const authSlice = createSlice({
@@ -87,10 +90,4 @@ const authSlice = createSlice({
   },
 });
 
-const persistConfigAuth = {
-  key: 'auth',
-  storage,
-  whitelist: ['refreshToken', 'isAuth', 'user', 'sid', 'token'],
-};
-
-export const authReducer = persistReducer(persistConfigAuth, authSlice.reducer);
+export const authReducer = authSlice.reducer;
