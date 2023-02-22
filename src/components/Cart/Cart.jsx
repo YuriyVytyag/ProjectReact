@@ -1,7 +1,10 @@
 export const Cart = (props) => {
   return(
     <>
-    <p>api</p>
+      <div>
+        Cart
+      </div>
+      <p>api</p>
     </>
   )
 }
