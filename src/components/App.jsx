@@ -1,10 +1,18 @@
 // import BasicModal from './Modal/Modal';
 import MainPage from 'pages/MainPage/MainPage';
+import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router';
 import Header from './Header/Header';
+import { refreshUser } from 'redux/auth/auth-operations';
 // import { Suspense } from 'react';
-
+import { useEffect } from 'react';
 const App = () => {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
   return (
     // <Suspense fallback={<Loader />}>
     <Routes>

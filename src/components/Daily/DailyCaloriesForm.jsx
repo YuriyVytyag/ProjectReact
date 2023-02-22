@@ -1,8 +1,8 @@
 import { Formik, Form } from 'formik';
 import { orange } from '@mui/material/colors';
-// import { dailyRate } from 'redux/dailyRate/dailyRate-operations';
-// import { useDispatch } from 'react-redux';
-// import { useState } from 'react';
+import { dailyRate } from 'redux/dailyRate/dailyRate-operations';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import {
   styled,
   useRadioGroup,
@@ -78,24 +78,24 @@ export const DailyCaloriesForm = () => {
     bloodType: 1,
   };
 
-  // const [formData, setFormData] = useState(InitialValues);
+  const [formData, setFormData] = useState(InitialValues);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const handleSubmit = async (values, { resetForm }) => {
-  //   const {bloodType, ...res} = values; 
-  //   const newFormData = {
-  //   ...res,
-  //   bloodType: Number(bloodType),
-  //  }
-  //   setFormData(newFormData);
-  //   dispatch(dailyRate(values))
-  // };
+  const handleSubmit = async (values, { resetForm }) => {
+    const {bloodType, ...res} = values; 
+    const newFormData = {
+    ...res,
+    bloodType: Number(bloodType),
+   }
+    setFormData(newFormData);
+    dispatch(dailyRate(values))
+  };
 
   return (
     <FormWrapper>
       <Title>Calculate your daily calorie intake right now</Title>
-      <Formik initialValues={InitialValues}>
+      <Formik initialValues={InitialValues} onSubmit={handleSubmit}>
         {({ values, handleChange, handleBlur, setFieldValue }) => (
           <Form>
             <MainWrap>

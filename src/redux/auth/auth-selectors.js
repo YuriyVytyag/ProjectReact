@@ -5,3 +5,4 @@ export const selectUserName = state => state.auth.user.username;
 export const selectUserEmail = state => state.auth.user.email;
 export const selectUserId = state => state.auth.user.id;
 export const selectError = state => state.auth.error;
+// export const selectIsLoggedIn = state => state.auth.isLoggedIn;

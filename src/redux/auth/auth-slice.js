@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import authOperations from './auth-operations';
-// import persistReducer from 'redux-persist/es/persistReducer';
-// import storage from 'redux-persist/lib/storage';
+import persistReducer from 'redux-persist/es/persistReducer';
+import storage from 'redux-persist/lib/storage';
 import { fetchStatus } from 'redux/fetchStatus';
 
 const initialState = {
@@ -14,6 +14,7 @@ const initialState = {
   user: {
     userName: '',
     email: '',
+    id:'',
   },
 };
 
@@ -25,7 +26,7 @@ const authSlice = createSlice({
       .addCase(authOperations.register.pending, (state, _) => {
         state.status = fetchStatus.pending;
       })
-      .addCase(authOperations.register.fulfilled, (state, action) => {
+      .addCase(authOperations.register.fulfilled, (state, action) => { //перевірити в екшині що тут прийде 
         state.status = fetchStatus.fullfield;
         state.token = action.payload.accessToken;
         state.refreshToken = action.payload.refreshToken;
@@ -41,7 +42,7 @@ const authSlice = createSlice({
       .addCase(authOperations.login.pending, (state, _) => {
         state.status = fetchStatus.pending;
       })
-      .addCase(authOperations.login.fulfilled, (state, action) => {
+      .addCase(authOperations.login.fulfilled, (state, action) => { // refreshToken, sid, user(emai, name, id), user data(зі всім)
         state.status = fetchStatus.fullfield;
         state.token = action.payload.accessToken;
         state.refreshToken = action.payload.refreshToken;
