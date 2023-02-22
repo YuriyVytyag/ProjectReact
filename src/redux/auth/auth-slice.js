@@ -11,6 +11,10 @@ const initialState = {
   sid: '',
   status: fetchStatus.idle,
   error: '',
+  user: {
+    userName: '',
+    email: '',
+  },
 };
 
 const authSlice = createSlice({
@@ -86,10 +90,4 @@ const authSlice = createSlice({
   },
 });
 
-const persistConfigAuth = {
-  key: 'auth',
-  storage,
-  whitelist: ['refreshToken', 'isAuth', 'user', 'sid', 'token'],
-};
-
-export const authReducer = persistReducer(persistConfigAuth, authSlice.reducer);
+export const authReducer = authSlice.reducer;
