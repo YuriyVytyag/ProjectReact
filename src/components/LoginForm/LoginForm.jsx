@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { FormLogIn, Input, Label, ErrorText } from './LoginForm.styled';
-import { logIn } from 'redux/authorization/auth-operations';
+import { login } from 'redux/auth/auth-operations';
 import { ButtonAuth, ButtonLinkAuth } from 'components/Button';
 import { Link } from 'react-router-dom';
 import { Box } from 'components/Box';
@@ -39,13 +39,14 @@ const initialValues = {
 };
 
 export const FormLogin = () => {
+  
   const [showPassword, setShow] = useState(false);
   const handleClick = () => setShow(!showPassword);
   const dispatch = useDispatch();
     const { t } = useTranslation();
 
   const handleSubmit = ({ email, password }, { resetForm }) => {
-    dispatch(logIn({ email, password }));
+    dispatch(login({ email, password }));
 
     resetForm();
   };
@@ -57,7 +58,7 @@ export const FormLogin = () => {
         onSubmit={handleSubmit}
         validationSchema={schema}
       >
-        <FormLogIn autoComplete="off">
+        <FormLogIn>
           <Box
             display="flex"
             flexDirection="column"

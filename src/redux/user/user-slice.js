@@ -6,6 +6,7 @@ import userOperations from './user-operations';
 import authOperations from 'redux/auth/auth-operations';
 
 const initialState = {
+  
   email: '',
   username: '',
   id: '',

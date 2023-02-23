@@ -71,5 +71,20 @@ export const refreshUser = createAsyncThunk(
   }
 );
 
+export const current = createAsyncThunk('current/user', async (_, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const persistToken = state.auth.token;
+  if (persistToken === null) {
+    return thunkAPI.rejectWithValue();
+  }
+  token.set(persistToken);
+  try {
+    const result = await API.currentUser();
+    return result;
+  } catch (e) {
+    return thunkAPI.rejectWithValue(e.message);
+  }
+});
+
 const authOperations = { register, login, logout, refreshUser };
 export default authOperations;
