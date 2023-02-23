@@ -1,4 +1,4 @@
-import { DailyCaloriesForm } from 'components/DailyCaloriesForm/DailyCaloriesForm';
+import { DailyCaloriesForm } from 'components/Daily/DailyCaloriesForm';
 
 const Calculator = () => {
   return (
@@ -6,6 +6,6 @@ const Calculator = () => {
       <DailyCaloriesForm />
     </>
   );
-}
+};
 
 export default Calculator;
