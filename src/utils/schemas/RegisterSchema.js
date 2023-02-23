@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 export const RegisterSchema = yup.object().shape({
-  name: yup
+  username: yup
     .string()
     .min(3, 'validationRegisterForm.label1')
     .max(15)

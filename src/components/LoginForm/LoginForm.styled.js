@@ -1,6 +1,5 @@
 import { Field, Form } from 'formik';
 import styled from '@emotion/styled';
-import { theme } from '../Theme';
 
 export const FormLogIn = styled(Form)`
   display: flex;
@@ -17,9 +16,9 @@ export const Label = styled.label`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  color: ${p => p.theme.colors.textFirst};
-  font-size: ${p => p.theme.fontSizes.s};
-  font-weight: ${p => p.theme.fontWeights.bold};
+  color: ${p => p.theme?.colors?.textFirst};
+  font-size: ${p => p.theme?.fontSizes?.s};
+  font-weight: ${p => p.theme?.fontWeights?.bold};
   width: 280px;
   position: relative;
 `;
@@ -27,7 +26,7 @@ export const Label = styled.label`
 export const Input = styled(Field)`
   border: none;
   border-bottom: 1px solid #e0e0e0;
-  outline-color: ${p => p.theme.colors.accent};
+  outline-color: ${p => p.theme?.colors?.accent};
   width: 100%;
   height: 20px;
   @media screen and (min-width: 768px) {
