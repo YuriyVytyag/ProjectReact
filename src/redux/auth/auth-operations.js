@@ -24,7 +24,6 @@ export const register = createAsyncThunk(
 );
 
 export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
-  console.log(user);
   try {
     const { data } = await API.login(user);
     token.set(data.accessToken);
