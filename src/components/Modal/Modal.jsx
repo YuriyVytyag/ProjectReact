@@ -16,11 +16,16 @@
 
 // export default Modal;
 import CircularProgressWithLabel from '../Loader/Loader';
-
 import * as React from 'react';
 import { Modal } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import { useSelector } from 'react-redux';
+import { selectKcal, selectNotAllowedProducts } from 'redux/dailyRate/dailyRate-selectors';
+// import { useState, useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
+// import { dailyRate } from 'redux/dailyRate/dailyRate-operations';
+
 import {
   StyledButton,
   CloseButton,
@@ -36,17 +41,24 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export default function BasicModal({open, onClose, setOpen}) {
+  const handleClose = () => setOpen(!open);
+  const calories = useSelector(selectKcal);
+  const notAllowedProducts = useSelector(selectNotAllowedProducts);
+  const products = notAllowedProducts.slice(0,4);
+
+  // const[respons, setRespons] = useState();
+  // const dispatch = useDispatch();
+
+//  useEffect(()=>{
+// dispatch(dailyRate(value))
+//  }, [dispatch])
 
   return (
     <div>
-      <StyledButton onClick={handleOpen}>Start losing weight</StyledButton>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={onClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -63,17 +75,22 @@ export default function BasicModal() {
           <StyledHeader id="modal-modal-title">
             Your recommended daily calorie intake is
           </StyledHeader>
-          <Calories>2800 ккал</Calories>
+          <Calories>{calories} ккал</Calories>
           <StyledTitle id="modal-modal-description" sx={{ mt: 2 }}>
             Foods you should not eat
           </StyledTitle>
           <ol>
-            <li>Flour products</li>
-            <li>Milk</li>
-            <li>Red meat</li>
-            <li>Smoked meats</li>
+            {products.map(product => {
+              return (
+                <li key={product}>
+                  {product}
+                </li>
+              )
+            })}
           </ol>
-          <StyledButton>Start losing weight</StyledButton>
+          <a to="/register"> Start losing weight
+          {/* <StyledButton>Start losing weight</StyledButton> */}
+          </a>
         </Wrapper>
       </Modal>
     </div>

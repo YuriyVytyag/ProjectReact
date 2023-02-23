@@ -71,6 +71,8 @@ export const RightWrap = styled.div`
 export const ButtonWrap = styled.div`
   display: flex;
   justify-content: center;
+  position: absolute;
+  z-index: -5;
   @media (min-width: 768px) {
     justify-content: flex-start;
   }

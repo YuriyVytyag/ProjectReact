@@ -3,6 +3,7 @@ import { orange } from '@mui/material/colors';
 import { dailyRate } from 'redux/dailyRate/dailyRate-operations';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import BasicModal from 'components/Modal/Modal';
 import {
   styled,
   useRadioGroup,
@@ -23,6 +24,7 @@ import {
   RightWrap,
   ButtonWrap,
 } from './DailyCaloriesForm.styled';
+import { position } from 'styled-system';
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
@@ -43,6 +45,9 @@ const StyledFormControlLabel = styled(props => <FormControlLabel {...props} />)(
     '.MuiFormControlLabel-label': checked && {
       color: orange[600],
     },
+    // '.MuiFormLabel':checked && {
+    //   color: orange[600],
+    // }
   })
 );
 
@@ -70,6 +75,19 @@ function MyFormControlLabel(props) {
 }
 
 export const DailyCaloriesForm = () => {
+  const [openModal, setOpenModal] = useState(false);
+  // const daileRate =  JSON.parse(localStorage.getItem('dailyRateData'));
+  // console.log(daileRate);
+  const dispatch = useDispatch();
+  const [dailyData, setDailyData] = useState({});
+
+  // const InitialValues = {
+  //   height: daileRate ? daileRate.height : '',
+  //   age: daileRate ? daileRate.age : '',
+  //   weight: daileRate ? daileRate.weight : '',
+  //   desiredWeight: daileRate ? daileRate.desiredWeight : '',
+  //   bloodType: daileRate ? daileRate.bloodType :  1,
+  // };
   const InitialValues = {
     height: '',
     age: '',
@@ -78,25 +96,35 @@ export const DailyCaloriesForm = () => {
     bloodType: 1,
   };
 
-  const [formData, setFormData] = useState(InitialValues);
-
-  const dispatch = useDispatch();
-
-  const handleSubmit = async (values, { resetForm }) => {
-    const {bloodType, ...res} = values; 
+  const handleSubmit = (values, { resetForm }) => {
+    const { bloodType, ...res } = values;
     const newFormData = {
-    ...res,
-    bloodType: Number(bloodType),
-   }
-    setFormData(newFormData);
-    dispatch(dailyRate(values))
+      ...res,
+      bloodType: Number(bloodType),
+    };
+    console.log(newFormData);
+    setDailyData(newFormData);
+
+    localStorage.setItem('dailyRateData', JSON.stringify(newFormData));
+    dispatch(dailyRate(newFormData));
+    resetForm();
+  };
+
+  const handleCloseModal = () => {
+    console.log(dailyData);
+    if (Object.values(dailyData).length !== 0) {
+      return setOpenModal(!openModal);
+    } 
+    // else {
+    //   return alert('Please write all input');
+    // }
   };
 
   return (
     <FormWrapper>
       <Title>Calculate your daily calorie intake right now</Title>
       <Formik initialValues={InitialValues} onSubmit={handleSubmit}>
-        {({ values, handleChange, handleBlur, setFieldValue }) => (
+        {({ values, handleChange, handleBlur }) => (
           <Form>
             <MainWrap>
               <LeftWrap>
@@ -143,33 +171,68 @@ export const DailyCaloriesForm = () => {
                   onChange={handleChange}
                 />
                 <RadioWraper>
-                <FormControl>
-                  <FormLabel id="demo-radio-buttons-group-label">
-                    Blood type*
-                  </FormLabel>
-                  <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="1"
-                    name="radio-buttons-group"
-                    row
-                  >
-                    <MyFormControlLabel value={1} label="1" onChange={handleChange} checked={values.bloodType === '1'} />
-                    <MyFormControlLabel value={2} label="2" onChange={handleChange} checked={values.bloodType === '2'} />
-                    <MyFormControlLabel value={3} label="3" onChange={handleChange} checked={values.bloodType === '3'} />
-                    <MyFormControlLabel value={4} label="4" onChange={handleChange} checked={values.bloodType === '4'} />
-                  </RadioGroup>
+                  <FormControl>
+                    <FormLabel id="demo-radio-buttons-group-label" sx={{color: orange[600]}}>
+                      Blood type*
+                    </FormLabel>
+                    <RadioGroup
+                      aria-labelledby="demo-radio-buttons-group-label"
+                      defaultValue="1"
+                      name="bloodType"
+                      row
+                    >
+                      <MyFormControlLabel
+                        value={1}
+                        label="1"
+                       
+                        onChange={handleChange}
+                        checked={values.bloodType === '1'}
+                      />
+                      <MyFormControlLabel
+                        value={2}
+                        label="2"
+                        
+                        onChange={handleChange}
+                        checked={values.bloodType === '2'}
+                      />
+                      <MyFormControlLabel
+                        value={3}
+                        label="3"
+                        
+                        onChange={handleChange}
+                        checked={values.bloodType === '3'}
+                      />
+                      <MyFormControlLabel
+                        value={4}
+                        label="4"
+                      
+                        onChange={handleChange}
+                        checked={values.bloodType === '4'}
+                      />
+                    </RadioGroup>
                   </FormControl>
                 </RadioWraper>
               </RightWrap>
             </MainWrap>
             <ButtonWrap>
-              <FormButton type="submit" variant="contained">
+              <FormButton
+                type="submit"
+                variant="contained"
+                onClick={handleCloseModal}
+              >
                 Start losing weight
               </FormButton>
             </ButtonWrap>
           </Form>
         )}
       </Formik>
+      {openModal && (
+        <BasicModal
+          open={openModal}
+          onClose={handleCloseModal}
+          setOpen={setOpenModal}
+        />
+      )}
     </FormWrapper>
   );
 };

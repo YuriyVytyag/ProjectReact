@@ -2,7 +2,7 @@ import Logo from 'components/Logo/Logo';
 import Navigation from 'components/Navigation/Navigation';
 import UserInfo from 'components/UserInfo/UserInfo';
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import s from '../Header/Header.module.css';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 
@@ -15,6 +15,7 @@ function Header() {
   }
 
   return (
+    <div>
     <header className={s.header}>
       <Logo />
       <div className={s.Navigation}>
@@ -36,6 +37,8 @@ function Header() {
         )}
       </div>
     </header>
+    <Outlet/>
+    </div>
   );
 }
 

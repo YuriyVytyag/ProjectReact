@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { dailyRate } from './dailyRate-operations';
-import persistReducer from 'redux-persist/es/persistReducer';
-import storage from 'redux-persist/lib/storage';
 
 const initialState = {
   dailyRate: null,
@@ -18,10 +16,10 @@ const dailyRateSlice = createSlice({
       .addCase(dailyRate.pending, state => {
         state.isLoading = true;
       })
-      .addCase(dailyRate.fulfilled, (state, action) => {
+      .addCase(dailyRate.fulfilled, (state, {payload}) => {
         state.isLoading = false;
-        state.dailyRate = action.payload.dailyRate;
-        state.notAllowedProducts = action.payload.notAllowedProducts;
+        state.dailyRate = payload.dailyRate;
+        state.notAllowedProducts = payload.notAllowedProducts;
       })
       .addCase(dailyRate.rejected, state => {
         state.isLoading = false;
@@ -29,13 +27,5 @@ const dailyRateSlice = createSlice({
   },
 });
 
-const persistConfigDailyRate = {
-  key: 'dailyRate',
-  storage,
-  whitelist: ['dailyRate', 'notAllowedProducts'],
-};
+export default dailyRateSlice.reducer;
 
-export const dailyRateReducer = persistReducer(
-  persistConfigDailyRate,
-  dailyRateSlice.reducer
-);

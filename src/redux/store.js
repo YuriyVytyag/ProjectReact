@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { dailyRateReducer } from './dailyRate/dailyRate-slice';
+import dailyRateReducer  from './dailyRate/dailyRate-slice';
 import { userReducer } from './user/user-slice';
 import { authReducer } from './auth/auth-slice';
 import storage from 'redux-persist/lib/storage';
@@ -20,9 +20,16 @@ const authConfig = {
   whitelist: ['token', 'refreshToken', 'sid'],
 };
 
+// const persistConfigDailyRate = {
+//   key: 'dailyRate',
+//   storage,
+//   whitelist: ['dailyRate', 'notAllowedProducts'],
+// };
+
 export const store = configureStore({
   reducer: {
     user: userReducer,
+    // daily: persistReducer(persistConfigDailyRate, dailyRateReducer),
     daily: dailyRateReducer,
     auth: persistReducer(authConfig, authReducer),
   },
