@@ -18,7 +18,6 @@ export const register = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await API.register(credentials);
-      console.log(data);
       return data;
     } catch (error) {
       thunkApi.rejectWithValue();
@@ -30,7 +29,6 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
     const { data } = await API.login(user);
     token.set(data.accessToken);
-    console.log(data);
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue();
@@ -41,7 +39,6 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     const response = await API.logout();
     token.unset();
-    console.log(response);
     return response;
   } catch (e) {
     return thunkAPI.rejectWithValue(e.message);
@@ -59,11 +56,9 @@ export const refreshUser = createAsyncThunk(
       return thunkAPI.rejectWithValue('Unable to fetch user');
     }
     token.set(persistedToken);
-    console.log(persistedToken)
     try {
       const { data } = await API.refresh(sid);
       token.set(data.newAccessToken);
-      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error?.response?.data?.message);

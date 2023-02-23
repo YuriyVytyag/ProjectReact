@@ -12,9 +12,8 @@ const Login = () => {
     <LoginPage>
       <TitleLogIn>Login</TitleLogIn>
       <FormLogin />
-      {/* {isLoading && <Loader />} */}
+      {isLoading && <Loader />}
       </LoginPage>
-      {/* // </AuthBackground> */}
       </>
   );
 };

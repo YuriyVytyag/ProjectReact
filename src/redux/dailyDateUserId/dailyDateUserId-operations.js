@@ -10,7 +10,6 @@ export const dailyRateUserId = createAsyncThunk(
       return data;
     } catch (err) {
       thunkApi.rejectWithValue();
-      console.log(err);
     }
   }
 );

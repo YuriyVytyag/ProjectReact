@@ -6,11 +6,9 @@ export const dailyRate = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await axios.post('/daily-rate', credentials);
-      // return data;
-      console.log(data);
+      return data;
     } catch (err) {
-      thunkApi.rejectWithValue();
-      console.log(err);
+      return thunkApi.rejectWithValue(err);
     }
   }
 );
