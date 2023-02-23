@@ -6,10 +6,9 @@ import { Link, NavLink } from 'react-router-dom';
 import s from '../Header/Header.module.css';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
-import { selectToken } from 'redux/auth/auth-selectors';
 
 function Header() {
-  const token = useSelector(selectToken);
+  const token = useSelector(state => state.auth.token);
   const [isOpen, setIsOpen] = useState(false);
 
   function handleClick() {
@@ -18,11 +17,11 @@ function Header() {
 
   return (
     <header className={s.header}>
-      <Link to={token ? '/diary' : '/'}>
+      <Link className={s.leftBlock} to={token ? '/diary' : '/'}>
         <Logo />
       </Link>
 
-      <div className={s.Navigation}>
+      <div className={`${s.Navigation} ${s.rightBlock}`}>
         <Navigation />
       </div>
 
@@ -35,8 +34,12 @@ function Header() {
           </button>
           {isOpen && (
             <div className={s.mobileMenu}>
-              <NavLink className={s.mobileLink}>Diary</NavLink>
-              <NavLink className={s.mobileLink}>Calculator</NavLink>
+              <NavLink to="/diary" className={s.mobileLink}>
+                Diary
+              </NavLink>
+              <NavLink to="/calculator" className={s.mobileLink}>
+                Calculator
+              </NavLink>
             </div>
           )}
         </div>
