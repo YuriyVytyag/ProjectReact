@@ -2,6 +2,8 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import API from 'services.js/API';
 
+// axios.defaults.baseURL = 'https://slimmom-backend.goit.global'
+
 export const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -54,7 +56,6 @@ export const refreshUser = createAsyncThunk(
       return thunkAPI.rejectWithValue('Unable to fetch user');
     }
     token.set(persistedToken);
-
     try {
       const { data } = await API.refresh(sid);
       token.set(data.newAccessToken);
