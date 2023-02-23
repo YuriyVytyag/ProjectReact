@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { FormLogIn, Input, Label, ErrorText } from './LoginForm.styled';
-import { logIn } from 'redux/authorization/auth-operations';
 import { ButtonAuth, ButtonLinkAuth } from 'components/Button';
 import { Link } from 'react-router-dom';
 import { Box } from 'components/Box';
 import 'react-toastify/dist/ReactToastify.css';
 import { ShowPasswordButton } from 'components/Button/ShowPasswordButton';
 import { useTranslation } from "react-i18next";
+import { login } from '../../redux/auth/auth-operations';
 
 const FormError = ({ name }) => {
     const { t } = useTranslation();
@@ -45,7 +45,7 @@ export const FormLogin = () => {
     const { t } = useTranslation();
 
   const handleSubmit = ({ email, password }, { resetForm }) => {
-    dispatch(logIn({ email, password }));
+    dispatch(login({ email, password }));
 
     resetForm();
   };

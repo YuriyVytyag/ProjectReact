@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import { register } from 'redux/auth/auth-operations';
 import { RegisterSchema } from 'utils/schemas/RegisterSchema';
@@ -15,10 +15,8 @@ import {
   FormReg,
   Wrap,
   MessageErr,
-  GoogleButton,
 } from './RegistrationForm.styled';
 import { ShowPasswordButton } from 'components/Button/ShowPasswordButton';
-import { userSelector } from 'redux/auth/auth-selectors';
 import { useTranslation } from "react-i18next";
 
 const FormError = ({ name }) => {
@@ -32,23 +30,20 @@ const FormError = ({ name }) => {
 };
 
 const initialValues = {
-  name: '',
+  username: '',
   email: '',
   password: '',
 };
 
 export const RegistrationForm = () => {
-  const userSavedData = useSelector(userSelector.selectUserSavedData);
 
   const [showPassword, setShow] = useState(false);
   const handleClick = () => setShow(!showPassword);
   const dispatch = useDispatch();
     const { t } = useTranslation();
 
-  const handleSubmit = async ({ name, email, password }, { resetForm }) => {
-    userSavedData
-      ? await dispatch(register({ ...userSavedData, name, email, password }))
-      : await dispatch(register({ name, email, password }));
+  const handleSubmit = async (values, { resetForm }) => {
+      await dispatch(register(values));
     resetForm();
   };
 
@@ -65,9 +60,9 @@ export const RegistrationForm = () => {
           <FormReg autoComplete="off">
             <FormList>
               <FormItem>
-                <Label htmlFor="name">{t("AuthForm.label_1")}</Label>
-                <Input id="name" name="name" type="text" />
-                <FormError name="name" component="p" />
+                <Label htmlFor="username">{t("AuthForm.label_1")}</Label>
+                <Input id="username" name="username" type="text" />
+                <FormError name="username" component="p" />
               </FormItem>
               <FormItem>
                 <Label htmlFor="email">{t("AuthForm.label_3")}</Label>

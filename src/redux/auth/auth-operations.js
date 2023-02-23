@@ -11,7 +11,7 @@ export const token = {
   },
 };
 
-const register = createAsyncThunk(
+export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkApi) => {
     try {
@@ -33,7 +33,7 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   }
 });
 
-const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     const response = await API.logout();
     token.unset();
@@ -64,6 +64,3 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
-
-const authOperations = { register, login, logout, refreshUser };
-export default authOperations;

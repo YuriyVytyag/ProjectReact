@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { dailyReducer } from './dailySlice';
-import { userReducer } from './userSlice';
+import { dailyRateReducer } from './dailyRate/dailyRate-slice';
+import { userReducer } from './user/user-slice';
 
-import { authReducer } from './authSlice';
+import { authReducer } from './auth/auth-slice';
 import storage from 'redux-persist/lib/storage';
 import {
   persistStore,
@@ -24,7 +24,7 @@ const persistConfig = {
 export const store = configureStore({
   reducer: {
     user: userReducer,
-    daily: dailyReducer,
+    daily: dailyRateReducer,
     auth: persistReducer(persistConfig, authReducer),
   },
 

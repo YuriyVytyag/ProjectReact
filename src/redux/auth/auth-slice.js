@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import authOperations from './auth-operations';
+import {register, login, logout, refreshUser} from './auth-operations';
 import { fetchStatus } from 'redux/fetchStatus';
 
 const initialState = {
@@ -8,6 +8,7 @@ const initialState = {
   refreshToken: '',
   sid: '',
   status: fetchStatus.idle,
+  isLoading: false,
   error: '',
   user: {
     userName: '',
@@ -20,10 +21,10 @@ const authSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(authOperations.register.pending, (state, _) => {
+      .addCase(register.pending, (state, _) => {
         state.status = fetchStatus.pending;
       })
-      .addCase(authOperations.register.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, (state, action) => {
         state.status = fetchStatus.fullfield;
         state.token = action.payload.accessToken;
         state.refreshToken = action.payload.refreshToken;
@@ -32,31 +33,34 @@ const authSlice = createSlice({
         state.isAuth = true;
         state.error = '';
       })
-      .addCase(authOperations.register.rejected, (state, _) => {
+      .addCase(register.rejected, (state, _) => {
         state.status = fetchStatus.rejected;
         state.token = null;
       })
-      .addCase(authOperations.login.pending, (state, _) => {
+      .addCase(login.pending, (state, _) => {
         state.status = fetchStatus.pending;
+        state.isLoading= true;
       })
-      .addCase(authOperations.login.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.status = fetchStatus.fullfield;
         state.token = action.payload.accessToken;
         state.refreshToken = action.payload.refreshToken;
         state.sid = action.payload.sid;
         state.user = { ...action.payload.user };
         state.isAuth = true;
+        state.isLoading= false;
         state.error = '';
       })
-      .addCase(authOperations.login.rejected, (state, _) => {
+      .addCase(login.rejected, (state, _) => {
         state.status = fetchStatus.rejected;
         state.token = null;
         state.refreshToken = '';
+        state.isLoading= false;
       })
-      .addCase(authOperations.logout.pending, (state, _) => {
+      .addCase(logout.pending, (state, _) => {
         state.status = fetchStatus.pending;
       })
-      .addCase(authOperations.logout.fulfilled, (state, _) => {
+      .addCase(logout.fulfilled, (state, _) => {
         state.status = fetchStatus.fullfield;
         state.token = '';
         state.refreshToken = '';
@@ -65,15 +69,15 @@ const authSlice = createSlice({
         state.user = {};
         state.error = '';
       })
-      .addCase(authOperations.logout.rejected, (state, _) => {
+      .addCase(logout.rejected, (state, _) => {
         state.status = fetchStatus.rejected;
         state.token = null;
       })
-      .addCase(authOperations.refreshUser.pending, state => {
+      .addCase(refreshUser.pending, state => {
         state.isFetched = false;
         state.error = '';
       })
-      .addCase(authOperations.refreshUser.fulfilled, (state, action) => {
+      .addCase(refreshUser.fulfilled, (state, action) => {
         state.token = action.payload.newAccessToken;
         state.refreshToken = action.payload.newRefreshToken;
         state.sid = action.payload.sid;
@@ -82,7 +86,7 @@ const authSlice = createSlice({
         state.isAuth = true;
         state.isFetched = true;
       })
-      .addCase(authOperations.refreshUser.rejected, (state, action) => {
+      .addCase(refreshUser.rejected, (state, _) => {
         state.isFetched = false;
       });
   },
