@@ -3,7 +3,7 @@ import { fetchStatus } from 'redux/fetchStatus';
 import persistReducer from 'redux-persist/es/persistReducer';
 import storage from 'redux-persist/lib/storage';
 import userOperations from './user-operations';
-import authOperations from 'redux/auth/auth-operations';
+import { logout } from 'redux/auth/auth-operations';
 
 const initialState = {
   
@@ -42,13 +42,13 @@ const userSlice = createSlice({
       .addCase(userOperations.current.rejected, (state, _) => {
         state.status = fetchStatus.rejected;
       })
-      .addCase(authOperations.logout.pending, (state, _) => {
+      .addCase(logout.pending, (state, _) => {
         state.status = fetchStatus.pending;
       })
-      .addCase(authOperations.logout.fulfilled, () => {
+      .addCase(logout.fulfilled, () => {
         return initialState;
       })
-      .addCase(authOperations.logout.rejected, () => {
+      .addCase(logout.rejected, () => {
         return initialState;
       });
   },

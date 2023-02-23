@@ -1,19 +1,16 @@
-// import { AuthBackground } from 'components/AuthBackground';
-// import Loader from 'components/Loader/Loader';
+//import { AuthBackground } from 'components/AuthBackground';
+import Loader from 'components/Loader/Loader';
 import { FormLogin } from 'components/LoginForm/LoginForm';
-// import { useAuth } from 'hooks/useAuth';
+import { useAuth } from 'hooks/useAuth';
 import { LoginPage, TitleLogIn } from './loginPage.styled';
-import { useTranslation } from "react-i18next";
 
 const Login = () => {
-  // const { isLoading } = useAuth();
-      const { t } = useTranslation();
+  const { isLoading } = useAuth();
 
   return (
     <>
-    {/* <AuthBackground/> */}
     <LoginPage>
-      <TitleLogIn>{t("header.login")}</TitleLogIn>
+      <TitleLogIn>Login</TitleLogIn>
       <FormLogin />
       {/* {isLoading && <Loader />} */}
       </LoginPage>

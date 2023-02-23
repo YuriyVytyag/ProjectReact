@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { authReducer } from './auth/auth-slice'; 
+import { dailyRateReducer } from './dailyRate/dailyRate-slice';
 import { userReducer } from './user/user-slice';
+import { authReducer } from './auth/auth-slice';
+import storage from 'redux-persist/lib/storage';
 import {
-  storage,
+  persistReducer,
   persistStore,
   FLUSH,
   REHYDRATE,
@@ -11,30 +13,18 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import { dailyRateReducer } from './dailyRate/dailyRate-slice';
-import { dailyRateUserIdReducer } from './dailyDateUserId/dailyDateUserId-slice';
-import { infoReducer } from './info/info-slice';
 
 const authConfig = {
   key: 'auth',
   storage,
-  whitelist: ['refreshToken', 'sid'],
+  whitelist: ['token', 'refreshToken', 'sid'],
 };
-
-// export const store = configureStore({
-//   reducer: {
-//     user: userReducer,
-//     daily: dailyRateUserIdReducer,
-//     auth: persistReducer(authConfig, authReducer), // логін реєстрація розлогі, рефреш, юзер інфо
-//   },
 
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(authConfig, authReducer),
     user: userReducer,
-    dailyRate: dailyRateReducer,
-    dailyRateUserId: dailyRateUserIdReducer,
-    infoUser: infoReducer,
+    daily: dailyRateReducer,
+    auth: persistReducer(authConfig, authReducer),
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

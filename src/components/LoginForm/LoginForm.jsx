@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { FormLogIn, Input, Label, ErrorText } from './LoginForm.styled';
-import { login } from 'redux/auth/auth-operations';
 import { ButtonAuth, ButtonLinkAuth } from 'components/Button';
 import { Link } from 'react-router-dom';
 import { Box } from 'components/Box';
 import 'react-toastify/dist/ReactToastify.css';
 import { ShowPasswordButton } from 'components/Button/ShowPasswordButton';
 import { useTranslation } from "react-i18next";
+import { login } from '../../redux/auth/auth-operations';
 
 const FormError = ({ name }) => {
     const { t } = useTranslation();
@@ -39,7 +39,6 @@ const initialValues = {
 };
 
 export const FormLogin = () => {
-  
   const [showPassword, setShow] = useState(false);
   const handleClick = () => setShow(!showPassword);
   const dispatch = useDispatch();
@@ -58,7 +57,7 @@ export const FormLogin = () => {
         onSubmit={handleSubmit}
         validationSchema={schema}
       >
-        <FormLogIn>
+        <FormLogIn autoComplete="off">
           <Box
             display="flex"
             flexDirection="column"
