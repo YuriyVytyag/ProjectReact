@@ -17,10 +17,10 @@ import {
   MessageErr,
 } from './RegistrationForm.styled';
 import { ShowPasswordButton } from 'components/Button/ShowPasswordButton';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 const FormError = ({ name }) => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
   return (
     <ErrorMessage
       name={name}
@@ -36,14 +36,13 @@ const initialValues = {
 };
 
 export const RegistrationForm = () => {
-
   const [showPassword, setShow] = useState(false);
   const handleClick = () => setShow(!showPassword);
   const dispatch = useDispatch();
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
   const handleSubmit = async (values, { resetForm }) => {
-      await dispatch(register(values));
+    await dispatch(register(values));
     resetForm();
   };
 
@@ -55,23 +54,23 @@ export const RegistrationForm = () => {
         validationSchema={RegisterSchema}
       >
         <Wrap>
-          <Title>{t("header.signup2")}</Title>
+          <Title>{t('header.signup2')}</Title>
 
           <FormReg autoComplete="off">
             <FormList>
               <FormItem>
-                <Label htmlFor="username">{t("AuthForm.label_1")}</Label>
+                <Label htmlFor="username">{t('AuthForm.label_1')}</Label>
                 <Input id="username" name="username" type="text" />
                 <FormError name="username" component="p" />
               </FormItem>
               <FormItem>
-                <Label htmlFor="email">{t("AuthForm.label_3")}</Label>
+                <Label htmlFor="email">{t('AuthForm.label_3')}</Label>
                 <Input id="email" name="email" type="text" />
                 <FormError name="email" component="p" />
               </FormItem>
 
               <FormItem>
-                <Label htmlFor="password">{t("AuthForm.label_2")}</Label>
+                <Label htmlFor="password">{t('AuthForm.label_2')}</Label>
                 <Input
                   id="password"
                   name="password"
@@ -85,9 +84,9 @@ export const RegistrationForm = () => {
               </FormItem>
             </FormList>
             <ButtonsContainer>
-              <ButtonAuth text={t("header.buttonReg")} />
+              <ButtonAuth text={t('header.buttonReg')} />
               <Link to="/login">
-                <ButtonLinkAuth text={t("header.buttonLogin")} />
+                <ButtonLinkAuth text={t('header.buttonLogin')} />
               </Link>
             </ButtonsContainer>
           </FormReg>
