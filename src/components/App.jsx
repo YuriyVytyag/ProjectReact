@@ -1,7 +1,9 @@
-import BasicModal from './Modal/Modal';
-
 // import { Route, Routes } from 'react-router';
 // import Header from './Header/Header';
+
+// import LoginForm from './LoginForm/index';
+
+import BasicModal from './Modal/Modal';
 
 const App = () => {
   return (
