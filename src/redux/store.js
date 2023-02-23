@@ -1,12 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { dailyRateReducer } from './dailyRate/dailyRate-slice';
 import { userReducer } from './user/user-slice';
-
 import { authReducer } from './auth/auth-slice';
 import storage from 'redux-persist/lib/storage';
 import {
-  persistStore,
   persistReducer,
+  persistStore,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -15,7 +14,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-const persistConfig = {
+const authConfig = {
   key: 'auth',
   storage,
   whitelist: ['token', 'refreshToken', 'sid'],
@@ -25,9 +24,8 @@ export const store = configureStore({
   reducer: {
     user: userReducer,
     daily: dailyRateReducer,
-    auth: persistReducer(persistConfig, authReducer),
+    auth: persistReducer(authConfig, authReducer),
   },
-
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
@@ -35,5 +33,5 @@ export const store = configureStore({
       },
     }),
 });
-
 export const persistor = persistStore(store);
+
