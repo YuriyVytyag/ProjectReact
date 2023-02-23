@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Formik, ErrorMessage } from 'formik';
+import { Formik, ErrorMessage, Field, Form } from 'formik';
 import * as yup from 'yup';
-import { FormLogIn, Input, Label, ErrorText } from './LoginForm.styled';
-import { logIn } from 'redux/authorization/auth-operations';
-import { ButtonAuth, ButtonLinkAuth } from 'components/Button';
+// import { FormLogIn, Input, Label, ErrorText } from './LoginForm.styled';
+import { login } from 'redux/auth/auth-operations';
+// import { ButtonLinkAuth } from 'components/Button';
 import { Link } from 'react-router-dom';
 import { Box } from 'components/Box';
 import 'react-toastify/dist/ReactToastify.css';
 import { ShowPasswordButton } from 'components/Button/ShowPasswordButton';
-import { useTranslation } from "react-i18next";
+// import s from '../LoginForm/LoginForm.module.css';
+import { Form, StyledFormButton } from './LoginForm.styled';
 
 const FormError = ({ name }) => {
-    const { t } = useTranslation();
-
   return (
     <ErrorMessage
       name={name}
-      render={message => <ErrorText>{t(message)}</ErrorText>}
+      render={message => <p>{(message)}</p>}
     />
   );
 };
@@ -42,10 +41,9 @@ export const FormLogin = () => {
   const [showPassword, setShow] = useState(false);
   const handleClick = () => setShow(!showPassword);
   const dispatch = useDispatch();
-    const { t } = useTranslation();
 
   const handleSubmit = ({ email, password }, { resetForm }) => {
-    dispatch(logIn({ email, password }));
+    dispatch(login({ email, password }));
 
     resetForm();
   };
@@ -57,7 +55,7 @@ export const FormLogin = () => {
         onSubmit={handleSubmit}
         validationSchema={schema}
       >
-        <FormLogIn autoComplete="off">
+        <Form autoComplete="off" className={s.Form}>
           <Box
             display="flex"
             flexDirection="column"
@@ -65,22 +63,22 @@ export const FormLogin = () => {
             mt="55px"
             gridGap="40px"
           >
-            <Label htmlFor="email">
-               {t("AuthForm.label_3")}<Input type="email" name="email"></Input>
+            <label htmlFor="email">
+               {("AuthForm.label_3")}<Field type="email" name="email"></Field>
               <FormError name="email" component="p" />
-            </Label>
-            <Label htmlFor="password">
-              {t("AuthForm.label_2")}
-              <Input
+            </label>
+            <label htmlFor="password">
+              {("AuthForm.label_2")}
+              <Field
                 name="password"
                 type={showPassword ? 'true' : 'password'}
-              ></Input>
+              ></Field>
               <FormError name="password" component="p" />
               <ShowPasswordButton
                 handleClick={handleClick}
                 show={showPassword}
               />
-            </Label>
+            </label>
           </Box>
           <Box
             display="flex"
@@ -88,12 +86,12 @@ export const FormLogin = () => {
             alignItems="center"
             gridGap={['20px', '32px']}
           >
-            <ButtonAuth text={t("header.buttonLogin")}></ButtonAuth>
+            <StyledFormButton type='submit' className={s.btnLogin}>Log In</StyledFormButton>
             <Link to="/registration">
-              <ButtonLinkAuth text={t("header.buttonReg")}></ButtonLinkAuth>
+              <button className={s.btnRef}></button>
             </Link>
           </Box>
-        </FormLogIn>
+        </Form>
       </Formik>
     </>
   );

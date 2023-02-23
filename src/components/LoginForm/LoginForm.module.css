@@ -1,0 +1,18 @@
+.Form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 76px;
+}
+
+.btnLogin {
+    background-color: #FC842D;
+    width: 210px;
+    border-radius: 20%;
+}
+
+/* .btnRef {
+  background-color: #FC842D;
+} */
+
+

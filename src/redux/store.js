@@ -1,12 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { dailyReducer } from './dailySlice';
-import { userReducer } from './userSlice';
-
-import { authReducer } from './authSlice';
-import storage from 'redux-persist/lib/storage';
+import { authReducer } from './auth/auth-slice';
+import { userReducer } from './user/user-slice';
 import {
   persistStore,
-  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -14,20 +10,18 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-
-const persistConfig = {
-  key: 'auth',
-  storage,
-  whitelist: ['token', 'refreshToken', 'sid'],
-};
+import { dailyRateReducer } from './dailyRate/dailyRate-slice';
+import { dailyRateUserIdReducer } from './dailyDateUserId/dailyDateUserId-slice';
+import { infoReducer } from './info/info-slice';
 
 export const store = configureStore({
   reducer: {
+    auth: authReducer,
     user: userReducer,
-    daily: dailyReducer,
-    auth: persistReducer(persistConfig, authReducer),
+    dailyRate: dailyRateReducer,
+    dailyRateUserId: dailyRateUserIdReducer,
+    infoUser: infoReducer,
   },
-
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
