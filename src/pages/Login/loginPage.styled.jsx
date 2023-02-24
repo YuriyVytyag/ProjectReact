@@ -20,4 +20,10 @@ export const LoginPage = styled.div`
 export const TitleLogIn = styled.h1`
   color: #FC842D;
   font-size: 14px;
+  @media screen and (min-width: 768px) {
+    margin-left: 32px;
+  }
+  @media screen and (min-width: 1280px) {
+    margin-left: 16px;
+  }
 `;

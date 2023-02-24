@@ -10,6 +10,11 @@ export const FormLogIn = styled(Form)`
   @media screen and (min-width: 768px) {
     align-items: start;
     gap: 60px;
+    margin-left: 32px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-left: 16px;
   }
 `;
 export const Label = styled.label`
@@ -24,11 +29,13 @@ export const Label = styled.label`
 `;
 
 export const Input = styled(Field)`
+  
   border: none;
   border-bottom: 1px solid #e0e0e0;
   outline-color: #FC842D;
   width: 100%;
   height: 20px;
+
   @media screen and (min-width: 768px) {
     max-width: 240px;
   }
