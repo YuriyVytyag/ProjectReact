@@ -86,7 +86,7 @@ export const FormLogin = () => {
             gridGap={['20px', '32px']}
           >
             <ButtonAuth text={("Log in")}></ButtonAuth>
-            <Link to="/registration">
+            <Link to="/register">
               <ButtonLinkAuth text={("Register")}></ButtonLinkAuth>
             </Link>
           </Box>
