@@ -1,20 +1,3 @@
-// import { Box, Button, Fab } from '@mui/material';
-// import { Add as AddIcon } from '@mui/icons-material';
-
-// const Modal = () => {
-//   return (
-//     <Box bgcolor="#FC842D">
-//       <Button variant="text">Text</Button>
-//       <Button variant="contained">Contained</Button>
-//       <Button variant="outlined">Outlined</Button>
-//       <Fab aria-label="add">
-//         <AddIcon />
-//       </Fab>
-//     </Box>
-//   );
-// };
-
-// export default Modal;
 import CircularProgressWithLabel from '../Loader/Loader';
 
 import * as React from 'react';
