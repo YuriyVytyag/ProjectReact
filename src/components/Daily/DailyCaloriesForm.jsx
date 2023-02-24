@@ -7,6 +7,7 @@ import { dailyRateUserId } from 'redux/dailyDateUserId/dailyDateUserId-operation
 import { selectIsAuth } from 'redux/auth/auth-selectors';
 import BasicModal from 'components/Modal/Modal';
 import * as yup from 'yup';
+import { selectUser } from 'redux/auth/auth-selectors';
 import {
   styled,
   useRadioGroup,
@@ -28,13 +29,12 @@ import {
   ButtonWrap,
 } from './DailyCaloriesForm.styled';
 
-
 let schema = yup.object().shape({
   height: yup.number().positive().required(),
   age: yup.number().positive().required(),
   weight: yup.number().positive().required(),
   desiredWeight: yup.number().positive().required(),
-  bloodType: yup.number(),
+  bloodType: yup.string(),
 });
 
 const CssTextField = styled(TextField)({
@@ -56,9 +56,6 @@ const StyledFormControlLabel = styled(props => <FormControlLabel {...props} />)(
     '.MuiFormControlLabel-label': checked && {
       color: orange[600],
     },
-    // '.MuiFormLabel':checked && {
-    //   color: orange[600],
-    // }
   })
 );
 
@@ -85,26 +82,11 @@ function MyFormControlLabel(props) {
   );
 }
 
-export const DailyCaloriesForm = () => {
+const DailyCaloriesForm = () => {
   const [openModal, setOpenModal] = useState(false);
-  // const daileRate =  JSON.parse(localStorage.getItem('dailyRateData'));
-  // console.log(daileRate);
   const dispatch = useDispatch();
-  const [dailyData, setDailyData] = useState({});
-  const dailyWithId = useSelector(state => state.user.id)
-  console.log(dailyWithId);
+  const user = useSelector(selectUser);
   const isLoggedIn = useSelector(selectIsAuth);
-  
-
-  //якщо кори зарег викликай функцію яка кладе id і велю, в іншому випадку модал вікно
-
-  // const InitialValues = {
-  //   height: daileRate ? daileRate.height : '',
-  //   age: daileRate ? daileRate.age : '',
-  //   weight: daileRate ? daileRate.weight : '',
-  //   desiredWeight: daileRate ? daileRate.desiredWeight : '',
-  //   bloodType: daileRate ? daileRate.bloodType :  1,
-  // };
   const InitialValues = {
     height: '',
     age: '',
@@ -113,39 +95,36 @@ export const DailyCaloriesForm = () => {
     bloodType: 1,
   };
 
-  
   const handleSubmit = (values, { resetForm }) => {
+  
     const { bloodType, ...res } = values;
     const newFormData = {
       ...res,
       bloodType: Number(bloodType),
     };
-    setDailyData(newFormData);
     localStorage.setItem('dailyRateData', JSON.stringify(newFormData));
-    
-  //   isLoggedIn ? 
-  //  ( dispatch(dailyRateUserId({id})) )
-  //   :
-     dispatch(dailyRate(newFormData));
+    if(isLoggedIn) {
+      dispatch(dailyRateUserId({ id: user.id, data: newFormData }))
+    }else{
+      dispatch(dailyRate(newFormData));
       setOpenModal(!openModal)
+    }
     resetForm();
   };
 
   const handleCloseModal = () => {
-    console.log(dailyData);
-    if (Object.values(dailyData).length !== 0) { //
-      return setOpenModal(!openModal);
-    }
-    // else {
-    //   return alert('Please write all input');
-    // }
+      setOpenModal(!openModal);
   };
 
   return (
     <FormWrapper>
       <Title>Calculate your daily calorie intake right now</Title>
-      <Formik initialValues={InitialValues} onSubmit={handleSubmit} validationSchema={schema}>
-        {({ values, handleChange, handleBlur }) => (
+      <Formik
+        initialValues={InitialValues}
+        onSubmit={handleSubmit}
+        validationSchema={schema}
+      >
+        {({ values, handleChange, handleBlur, errors }) => (
           <Form>
             <MainWrap>
               <LeftWrap>
@@ -238,7 +217,6 @@ export const DailyCaloriesForm = () => {
               <FormButton
                 type="submit"
                 variant="contained"
-                onClick={handleCloseModal}
               >
                 Start losing weight
               </FormButton>
@@ -256,3 +234,6 @@ export const DailyCaloriesForm = () => {
     </FormWrapper>
   );
 };
+
+
+export default DailyCaloriesForm;

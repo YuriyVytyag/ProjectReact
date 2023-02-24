@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import persistReducer from 'redux-persist/es/persistReducer';
-import storage from 'redux-persist/lib/storage';
+// import persistReducer from 'redux-persist/es/persistReducer';
+// import storage from 'redux-persist/lib/storage';
 import { dailyRateUserId } from './dailyDateUserId-operations';
 
 const initialState = {
@@ -9,7 +9,7 @@ const initialState = {
   summaries: [
     {
       _id: 0,
-      date: myDate,
+      date: 0,
       kcalLeft: 0,
       kcalConsumed: 0,
       dailyRate: 0,
@@ -43,13 +43,10 @@ const dailyRateUserIdSlice = createSlice({
   },
 });
 
-const persistConfigDailyRateUserId = {
-  key: 'dailyRateUserId',
-  storage,
-  whitelist: ['dailyRate', 'notAllowedProducts', 'summaries'],
-};
+// const persistConfigDailyRateUserId = {
+//   key: 'dailyRateUserId',
+//   storage,
+//   whitelist: ['dailyRate', 'notAllowedProducts', 'summaries'],
+// };
 
-export const dailyRateUserIdReducer = persistReducer(
-  persistConfigDailyRateUserId,
-  dailyRateUserIdSlice.reducer
-);
+export const dailyRateUserIdReducer =  dailyRateUserIdSlice.reducer;

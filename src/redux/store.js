@@ -20,16 +20,9 @@ const authConfig = {
   whitelist: ['token', 'refreshToken', 'sid'],
 };
 
-// const persistConfigDailyRate = {
-//   key: 'dailyRate',
-//   storage,
-//   whitelist: ['dailyRate', 'notAllowedProducts'],
-// };
-
 export const store = configureStore({
   reducer: {
     user: userReducer,
-    // daily: persistReducer(persistConfigDailyRate, dailyRateReducer),
     daily: dailyRateReducer,
     auth: persistReducer(authConfig, authReducer),
   },

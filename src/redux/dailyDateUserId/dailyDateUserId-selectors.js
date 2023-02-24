@@ -1,1 +1,1 @@
-export const selectDailyRateUserId = state => state.user.dailyRate;
+export const selectDailyRateUserId = state => state.dailyId.id;
