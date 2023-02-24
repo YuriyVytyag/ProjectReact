@@ -1,14 +1,16 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import s from '../Navigation/Navigation.module.css';
+import { useAuth } from 'hooks/useAuth';
 
 function Navigation() {
-  const token = useSelector(state => state.auth.token);
+  // const token = useSelector(state => state.auth.token);
+  const { isLoggedIn } = useAuth();
 
   return (
     <>
-      {!token ? (
+      {!isLoggedIn ? (
         <ul className={s.list}>
           <li className={s.item}>
             <NavLink
