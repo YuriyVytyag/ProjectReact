@@ -7,6 +7,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { object, string, number } from 'yup';
 import { searchProducts } from 'services.js/API';
 import { useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUser } from 'redux/auth/auth-selectors';
 
 let productSchema = object({
   product: string().required(),
@@ -14,39 +16,44 @@ let productSchema = object({
 });
 
 export default function DiaryAddProductForm() {
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch;
   const [products, setProducts] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get('search') ?? '';
 
-  const handleChange = event => {
-    const search = event.target.value
-    // console.log(search);
-    return search
-  };
-
-  useEffect(() => {
-    // if (search === '') {
-    //   return;
-    // }
-console.log('hagl')
-      searchProducts("Меланж").then(response =>{ 
-        console.log(response)
-        const products = response[0].title ? response : []
-        console.log(products)
-        // setProducts(response.data);
-  });
-    
-  }, []);
-
+  console.log(user);
 
   const initialValue = {
     product: '',
     weight: '',
   };
 
- 
+  const handleChange = event => {
+    // dispatch();
+    const search = event.target.value;
+    // console.log(search);
+    return search;
+  };
+
+  useEffect(() => {
+    // if (search === '') {
+    //   return;
+    // }
+    console.log('hagl');
+    searchProducts('Меланж').then(response => {
+      console.log(response);
+      const products = response[0].title ? response : [];
+      console.log(products);
+      // setProducts(response.data);
+    });
+  }, []);
 
   const handleSubmit = (value, { resetForm }) => {
+    const newProduct = {
+      product: value.product,
+      weight: value.weight,
+    };
     console.log(value);
     resetForm();
   };
