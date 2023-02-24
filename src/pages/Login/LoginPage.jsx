@@ -10,7 +10,7 @@ const Login = () => {
   return (
     <>
     <LoginPage>
-      <TitleLogIn>LOG IN</TitleLogIn>
+      <TitleLogIn>Login</TitleLogIn>
       <FormLogin />
       {isLoading && <Loader />}
       </LoginPage>
