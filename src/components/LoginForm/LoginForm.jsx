@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { FormLogIn, Input, Label, ErrorText } from './LoginForm.styled';
-import { ButtonAuth, ButtonLinkAuth } from 'components/Button/index';
+import { ButtonAuth, ButtonLinkAuth } from 'components/Button';
 import { Link } from 'react-router-dom';
 import { Box } from 'components/Box';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,6 +11,7 @@ import { ShowPasswordButton } from 'components/Button/ShowPasswordButton';
 import { login } from '../../redux/auth/auth-operations';
 
 const FormError = ({ name }) => {
+
   return (
     <ErrorMessage
       name={name}
@@ -84,9 +85,9 @@ export const FormLogin = () => {
             alignItems="center"
             gridGap={['20px', '32px']}
           >
-            <ButtonAuth text={("Login")}></ButtonAuth>
+            <ButtonAuth text={("Log in")}></ButtonAuth>
             <Link to="/registration">
-              <ButtonLinkAuth text={("Registration")}></ButtonLinkAuth>
+              <ButtonLinkAuth text={("Register")}></ButtonLinkAuth>
             </Link>
           </Box>
         </FormLogIn>
