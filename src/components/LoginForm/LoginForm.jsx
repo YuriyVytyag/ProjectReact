@@ -8,11 +8,11 @@ import { Link } from 'react-router-dom';
 import { Box } from 'components/Box';
 import 'react-toastify/dist/ReactToastify.css';
 import { ShowPasswordButton } from 'components/Button/ShowPasswordButton';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 import { login } from '../../redux/auth/auth-operations';
 
 const FormError = ({ name }) => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <ErrorMessage
@@ -42,7 +42,7 @@ export const FormLogin = () => {
   const [showPassword, setShow] = useState(false);
   const handleClick = () => setShow(!showPassword);
   const dispatch = useDispatch();
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
   const handleSubmit = ({ email, password }, { resetForm }) => {
     dispatch(login({ email, password }));
@@ -66,11 +66,12 @@ export const FormLogin = () => {
             gridGap="40px"
           >
             <Label htmlFor="email">
-               {t("AuthForm.label_3")}<Input type="email" name="email"></Input>
+              {t('AuthForm.label_3')}
+              <Input type="email" name="email"></Input>
               <FormError name="email" component="p" />
             </Label>
             <Label htmlFor="password">
-              {t("AuthForm.label_2")}
+              {t('AuthForm.label_2')}
               <Input
                 name="password"
                 type={showPassword ? 'true' : 'password'}
@@ -88,9 +89,9 @@ export const FormLogin = () => {
             alignItems="center"
             gridGap={['20px', '32px']}
           >
-            <ButtonAuth text={t("header.buttonLogin")}></ButtonAuth>
-            <Link to="/registration">
-              <ButtonLinkAuth text={t("header.buttonReg")}></ButtonLinkAuth>
+            <ButtonAuth text={t('header.buttonLogin')}></ButtonAuth>
+            <Link to="/register">
+              <ButtonLinkAuth text={t('header.buttonReg')}></ButtonLinkAuth>
             </Link>
           </Box>
         </FormLogIn>
