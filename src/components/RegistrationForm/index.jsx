@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import { register } from 'redux/auth/auth-operations';
 import { RegisterSchema } from 'utils/schemas/RegisterSchema';
-import { ButtonLinkAuth, ButtonAuth } from 'components/Button';
+import { ButtonLinkAuth, ButtonAuth } from 'components/Button/index';
 import { Link } from 'react-router-dom';
 import {
   Title,

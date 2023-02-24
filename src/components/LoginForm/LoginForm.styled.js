@@ -1,5 +1,6 @@
 import { Field, Form } from 'formik';
 import styled from '@emotion/styled';
+import { theme } from '../Theme';
 
 export const FormLogIn = styled(Form)`
   display: flex;
