@@ -19,8 +19,10 @@
 .active {
   text-decoration: none;
   color: #212121;
+  font-weight: 700;
 }
 .NavLink {
   text-decoration: none;
   color: #9b9faa;
+  font-weight: 700;
 }

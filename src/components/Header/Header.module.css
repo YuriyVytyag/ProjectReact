@@ -13,6 +13,7 @@
 @media screen and (max-width: 767px) {
   .header {
     margin: 20px 20px 20px 16px;
+    border-bottom: 2px solid rgb(224, 224, 224);
   }
 }
 
@@ -35,14 +36,16 @@
     justify-content: flex-start;
     align-items: flex-end;
   }
-  .UserInfo {
-    display: none;
-  }
 }
 
 /* ---------------------- <Burger menu> --------------------------- */
 
 @media screen and (max-width: 1279px) {
+  .UserInfo {
+    position: fixed;
+    top: 55px;
+    right: 10px;
+  }
   .leftBlock {
     /* flex-basis: 50%; */
     margin-right: auto;
@@ -75,14 +78,34 @@
     height: 100%;
     top: 90px;
     right: 0;
+    left: 0;
+    bottom: 0;
     align-items: center;
     background-color: #264061;
-    overflow: auto;
+    overflow: hidden;
+    opacity: 1;
+    z-index: 9999;
   }
+
+  /* .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  } */
 
   .mobileLink {
     text-decoration: none;
     color: #f0f1f3;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .activeLink {
+    text-decoration: none;
+    color: #212121;
+    font-weight: 700;
     text-transform: uppercase;
   }
   .mobileLink:first-child {
