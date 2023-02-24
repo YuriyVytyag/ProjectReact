@@ -6,7 +6,18 @@ import { dailyRateUserId } from './dailyDateUserId-operations';
 const initialState = {
   id: null,
   dailyRate: null,
-  summaries: [],
+  summaries: [
+    {
+      _id: 0,
+      date: myDate,
+      kcalLeft: 0,
+      kcalConsumed: 0,
+      dailyRate: 0,
+      percentsOfDailyRate: 0,
+      userId: 0,
+      __v: 0,
+    },
+  ],
   notAllowedProducts: [],
   isLoading: false,
 };

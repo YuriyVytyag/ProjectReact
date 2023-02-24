@@ -1,9 +1,10 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { orange } from '@mui/material/colors';
 import { dailyRate } from 'redux/dailyRate/dailyRate-operations';
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
 import BasicModal from 'components/Modal/Modal';
+import * as yup from 'yup';
 import {
   styled,
   useRadioGroup,
@@ -24,7 +25,14 @@ import {
   RightWrap,
   ButtonWrap,
 } from './DailyCaloriesForm.styled';
-import { position } from 'styled-system';
+
+let schema = yup.object().shape({
+  height: yup.number().required().positive(),
+  age: yup.number().required().positive(),
+  weight: yup.number().required().positive(),
+  desiredWeight: yup.number().required().positive(),
+  bloodType: yup.number().required(),
+});
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
@@ -114,7 +122,7 @@ export const DailyCaloriesForm = () => {
     console.log(dailyData);
     if (Object.values(dailyData).length !== 0) {
       return setOpenModal(!openModal);
-    } 
+    }
     // else {
     //   return alert('Please write all input');
     // }
@@ -123,7 +131,7 @@ export const DailyCaloriesForm = () => {
   return (
     <FormWrapper>
       <Title>Calculate your daily calorie intake right now</Title>
-      <Formik initialValues={InitialValues} onSubmit={handleSubmit}>
+      <Formik initialValues={InitialValues} onSubmit={handleSubmit} validationSchema={schema}>
         {({ values, handleChange, handleBlur }) => (
           <Form>
             <MainWrap>
@@ -172,7 +180,10 @@ export const DailyCaloriesForm = () => {
                 />
                 <RadioWraper>
                   <FormControl>
-                    <FormLabel id="demo-radio-buttons-group-label" sx={{color: orange[600]}}>
+                    <FormLabel
+                      id="demo-radio-buttons-group-label"
+                      sx={{ color: orange[600] }}
+                    >
                       Blood type*
                     </FormLabel>
                     <RadioGroup
@@ -184,28 +195,24 @@ export const DailyCaloriesForm = () => {
                       <MyFormControlLabel
                         value={1}
                         label="1"
-                       
                         onChange={handleChange}
                         checked={values.bloodType === '1'}
                       />
                       <MyFormControlLabel
                         value={2}
                         label="2"
-                        
                         onChange={handleChange}
                         checked={values.bloodType === '2'}
                       />
                       <MyFormControlLabel
                         value={3}
                         label="3"
-                        
                         onChange={handleChange}
                         checked={values.bloodType === '3'}
                       />
                       <MyFormControlLabel
                         value={4}
                         label="4"
-                      
                         onChange={handleChange}
                         checked={values.bloodType === '4'}
                       />

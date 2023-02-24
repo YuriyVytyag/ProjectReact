@@ -7,7 +7,6 @@ import Header from './components/Header/Header';
 import MainPage from 'pages/MainPage/MainPage';
 import RegistrationPage from './pages/RegistrationPage';
 import Diary from 'pages/Diary/Diary';
-import MainPage from 'pages/MainPage/MainPage';
 
 
 const App = () => {
