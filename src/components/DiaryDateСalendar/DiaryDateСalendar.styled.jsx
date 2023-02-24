@@ -1,0 +1,46 @@
+import styled from "styled-components";
+import { DatePicker } from '@mui/x-date-pickers';
+
+export const DatePickerStyled = styled(DatePicker)`
+    .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border: none;
+}
+.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 700;
+font-size: 34px;
+line-height: 41px;
+color: #212121;
+}
+
+.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+    width: 219px;
+}
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    min-width: 219px;
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+    /* font: inherit; */
+    letter-spacing: inherit;
+    color: currentColor;
+    padding: 4px 0 5px;
+    border: 0;
+    box-sizing: content-box;
+    background: none;
+    height: 1.4375em;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+    display: block;
+    min-width: 0;
+    width: 100%;
+    -webkit-animation-name: mui-auto-fill-cancel;
+    animation-name: mui-auto-fill-cancel;
+    -webkit-animation-duration: 10ms;
+    animation-duration: 10ms;
+    padding: 16.5px 14px;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 41px;
+    color: #212121;
+}
+`

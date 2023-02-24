@@ -1,21 +1,20 @@
 import { RightSideBar } from 'components/RightSideBar/RightSideBar';
-import styled from '@emotion/styled';
+import DiaryDateCalendar from 'components/DiaryDateСalendar/DiaryDateСalendar';
+import DiaryAddProductForm from 'components/DiaryAddProductForm/DiaryAddProductForm';
+import DiaryProductsList from 'components/DiaryProductsList/DiaryProductsList';
+import { StyledDiary, DiaryWrapper } from './Diary.styled';
 
 const Diary = () => {
   return (
     <StyledDiary>
-      {/* Diari Form */}
+      <DiaryWrapper>
+        <DiaryDateCalendar />
+        <DiaryAddProductForm />
+        <DiaryProductsList />
+      </DiaryWrapper>
       <RightSideBar />
     </StyledDiary>
   );
 };
 
 export default Diary;
-
-const StyledDiary = styled.div`
-  display: flex;
-  flex-direction: column;
-  @media screen and (min-width: 1200px) {
-    flex-direction: row;
-  }
-`;
