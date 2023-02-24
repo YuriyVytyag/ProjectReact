@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { theme } from '../Theme';
 import { Link } from 'react-router-dom';
 import { Field, Form } from 'formik';
 
@@ -25,6 +24,11 @@ export const Title = styled.h1`
   margin-bottom: 60px;
   @media screen and (min-width: 768px) {
     text-align: start;
+    margin-left: 32px;
+  }
+ 
+  @media screen and (min-width: 1280px) {
+    margin-left: 16px;
   }
 `;
 
@@ -34,6 +38,10 @@ export const FormReg = styled(Form)`
   align-items: center;
   @media screen and (min-width: 768px) {
     align-items: start;
+    margin-left: 32px;
+  }
+  @media screen and (min-width: 1280px) {
+    margin-left: 16px;
   }
 `;
 
@@ -42,6 +50,7 @@ export const FormList = styled.ul`
   flex-direction: column;
   gap: 40px;
   margin-bottom: 60px;
+  list-style: none;
   @media screen and (min-width: 768px) {
     margin-bottom: 80px;
   }
