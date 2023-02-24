@@ -11,11 +11,10 @@ import { ShowPasswordButton } from 'components/Button/ShowPasswordButton';
 import { login } from '../../redux/auth/auth-operations';
 
 const FormError = ({ name }) => {
-
   return (
     <ErrorMessage
       name={name}
-      render={message => <ErrorText>{(message)}</ErrorText>}
+      render={message => <ErrorText>{message}</ErrorText>}
     />
   );
 };
@@ -63,11 +62,12 @@ export const FormLogin = () => {
             gridGap="40px"
           >
             <Label htmlFor="email">
-               {("Email *")}<Input type="email" name="email"></Input>
+              {'Email *'}
+              <Input type="email" name="email"></Input>
               <FormError name="email" component="p" />
             </Label>
             <Label htmlFor="password">
-              {("Password *")}
+              {'Password *'}
               <Input
                 name="password"
                 type={showPassword ? 'true' : 'password'}
@@ -85,9 +85,9 @@ export const FormLogin = () => {
             alignItems="center"
             gridGap={['20px', '32px']}
           >
-            <ButtonAuth text={("Log in")}></ButtonAuth>
+            <ButtonAuth text={'Log in'}></ButtonAuth>
             <Link to="/register">
-              <ButtonLinkAuth text={("Register")}></ButtonLinkAuth>
+              <ButtonLinkAuth text={'Register'}></ButtonLinkAuth>
             </Link>
           </Box>
         </FormLogIn>
