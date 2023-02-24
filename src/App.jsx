@@ -24,7 +24,6 @@ const App = () => {
         <Routes>
           <Route path="/">
             <Route index element={<MainPage />} />
-            <Route index element={<Calculator />} />
             <Route
               path="register"
               element={
@@ -43,6 +42,12 @@ const App = () => {
             <Route
               path="/diary"
               element={<PrivateRoute component={Diary} redirectTo="/login" />}
+            />
+            <Route
+              path="/calculator"
+              element={
+                <PrivateRoute component={Calculator} redirectTo="/login" />
+              }
             />
           </Route>
         </Routes>
