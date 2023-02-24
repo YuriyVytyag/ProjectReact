@@ -20,7 +20,7 @@ function Navigation() {
           </li>
           <li>
             <NavLink
-              to="/registration"
+              to="/register"
               className={({ isActive }) => (isActive ? s.active : s.NavLink)}
             >
               REGISTRATION
