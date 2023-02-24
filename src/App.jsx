@@ -4,6 +4,9 @@ import { PrivateRoute } from 'PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { lazy, Suspense } from 'react';
 import CircularProgressWithLabel from 'components/Loader/Loader';
+import { useDispatch } from 'react-redux';
+import { refreshUser } from 'redux/auth/auth-operations';
+import { useEffect } from 'react';
 
 // import Calculator from 'pages/Calculator/Calculator';
 import Header from './components/Header/Header';
@@ -17,7 +20,10 @@ const RegistrationPage = lazy(() => import('pages/RegistrationPage'));
 const Calculator = lazy(() => import('pages/Calculator/Calculator'));
 
 const App = () => {
-
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(refreshUser())
+  }, [dispatch])
 
   return (
     <>

@@ -50,7 +50,6 @@ export const refreshUser = createAsyncThunk(
   async (_, thunkAPI) => {
     const store = thunkAPI.getState();
     const persistedToken = store.auth.refreshToken;
-    console.log(persistedToken);
     const sid = store.auth.sid;
 
     if (!persistedToken) {
