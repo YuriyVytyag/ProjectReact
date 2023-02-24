@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 
-
 export const LoginPage = styled.div`
   display: flex;
   flex-direction: column;
@@ -18,6 +17,6 @@ export const LoginPage = styled.div`
 `;
 
 export const TitleLogIn = styled.h1`
-  color: #FC842D;
-  font-size: 14px;
+  color: ${p => p.theme?.colors?.accent};
+  font-size: ${p => p.theme?.fontSizes?.s};
 `;
