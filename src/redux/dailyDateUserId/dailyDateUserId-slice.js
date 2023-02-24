@@ -1,12 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
-import persistReducer from 'redux-persist/es/persistReducer';
-import storage from 'redux-persist/lib/storage';
+// import persistReducer from 'redux-persist/es/persistReducer';
+// import storage from 'redux-persist/lib/storage';
 import { dailyRateUserId } from './dailyDateUserId-operations';
 
 const initialState = {
   id: null,
   dailyRate: null,
-  summaries: [],
+  summaries: [
+    {
+      _id: 0,
+      date: 0,
+      kcalLeft: 0,
+      kcalConsumed: 0,
+      dailyRate: 0,
+      percentsOfDailyRate: 0,
+      userId: 0,
+      __v: 0,
+    },
+  ],
   notAllowedProducts: [],
   isLoading: false,
 };
@@ -32,13 +43,10 @@ const dailyRateUserIdSlice = createSlice({
   },
 });
 
-const persistConfigDailyRateUserId = {
-  key: 'dailyRateUserId',
-  storage,
-  whitelist: ['dailyRate', 'notAllowedProducts', 'summaries'],
-};
+// const persistConfigDailyRateUserId = {
+//   key: 'dailyRateUserId',
+//   storage,
+//   whitelist: ['dailyRate', 'notAllowedProducts', 'summaries'],
+// };
 
-export const dailyRateUserIdReducer = persistReducer(
-  persistConfigDailyRateUserId,
-  dailyRateUserIdSlice.reducer
-);
+export const dailyRateUserIdReducer =  dailyRateUserIdSlice.reducer;

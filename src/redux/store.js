@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { dailyRateReducer } from './dailyRate/dailyRate-slice';
+import dailyRateReducer  from './dailyRate/dailyRate-slice';
 import { userReducer } from './user/user-slice';
 import { authReducer } from './auth/auth-slice';
 import storage from 'redux-persist/lib/storage';

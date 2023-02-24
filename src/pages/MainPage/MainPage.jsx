@@ -1,16 +1,23 @@
-import { DailyCaloriesForm } from "components/Daily/DailyCaloriesForm";
+import DailyCaloriesForm from 'components/Daily/DailyCaloriesForm';
 import ImgDesctop from '../../assets/images/destop.png';
 import ImgTab from '../../assets/images/tablet.png';
-import { DesctopImg, TabletImg } from "./MainPage.styled";
+import { DesctopImg, TabletImg } from './MainPage.styled';
+import { selectIsAuth } from 'redux/auth/auth-selectors';
+import { useSelector } from 'react-redux';
 
 const MainPage = () => {
-    return (
+  const isLoggedIn = useSelector(selectIsAuth);
+  return (
+    <>
+      <DailyCaloriesForm />
+      {!isLoggedIn && (
         <>
-        <DailyCaloriesForm/>  
-        <DesctopImg src={ImgDesctop}/>
-        <TabletImg src={ImgTab}/>
+          <DesctopImg src={ImgDesctop} />
+          <TabletImg src={ImgTab} />
         </>
-    )
-}
+      )}
+    </>
+  );
+};
 
 export default MainPage;
