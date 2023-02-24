@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import { register } from 'redux/auth/auth-operations';
 import { RegisterSchema } from 'utils/schemas/RegisterSchema';
-import { ButtonAuth, ButtonLinkAuth } from 'components/Button';
+import { ButtonLinkAuth, ButtonAuth } from 'components/Button/index';
 import { Link } from 'react-router-dom';
 import {
   Title,
@@ -17,14 +17,12 @@ import {
   MessageErr,
 } from './RegistrationForm.styled';
 import { ShowPasswordButton } from 'components/Button/ShowPasswordButton';
-import { useTranslation } from 'react-i18next';
 
 const FormError = ({ name }) => {
-  const { t } = useTranslation();
   return (
     <ErrorMessage
       name={name}
-      render={message => <MessageErr>{t(message)}</MessageErr>}
+      render={message => <MessageErr>{(message)}</MessageErr>}
     />
   );
 };
@@ -39,7 +37,6 @@ export const RegistrationForm = () => {
   const [showPassword, setShow] = useState(false);
   const handleClick = () => setShow(!showPassword);
   const dispatch = useDispatch();
-  const { t } = useTranslation();
 
   const handleSubmit = async (values, { resetForm }) => {
     await dispatch(register(values));
@@ -54,23 +51,23 @@ export const RegistrationForm = () => {
         validationSchema={RegisterSchema}
       >
         <Wrap>
-          <Title>{t('header.signup2')}</Title>
+          <Title>{('header.signup2')}</Title>
 
           <FormReg autoComplete="off">
             <FormList>
               <FormItem>
-                <Label htmlFor="username">{t('AuthForm.label_1')}</Label>
+                <Label htmlFor="username">{('Name *')}</Label>
                 <Input id="username" name="username" type="text" />
                 <FormError name="username" component="p" />
               </FormItem>
               <FormItem>
-                <Label htmlFor="email">{t('AuthForm.label_3')}</Label>
+                <Label htmlFor="email">{('Email *')}</Label>
                 <Input id="email" name="email" type="text" />
                 <FormError name="email" component="p" />
               </FormItem>
 
               <FormItem>
-                <Label htmlFor="password">{t('AuthForm.label_2')}</Label>
+                <Label htmlFor="password">{('Password *')}</Label>
                 <Input
                   id="password"
                   name="password"
@@ -84,9 +81,9 @@ export const RegistrationForm = () => {
               </FormItem>
             </FormList>
             <ButtonsContainer>
-              <ButtonAuth text={t('header.buttonReg')} />
+              <ButtonAuth text={('header.buttonReg')} />
               <Link to="/login">
-                <ButtonLinkAuth text={t('header.buttonLogin')} />
+                <ButtonLinkAuth text={('header.buttonLogin')} />
               </Link>
             </ButtonsContainer>
           </FormReg>

@@ -22,6 +22,7 @@ const authConfig = {
 
 export const store = configureStore({
   reducer: {
+    auth: authReducer,
     user: userReducer,
     daily: dailyRateReducer,
     auth: persistReducer(authConfig, authReducer),
