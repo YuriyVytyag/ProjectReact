@@ -62,11 +62,11 @@ export const FormLogin = () => {
             gridGap="40px"
           >
             <Label htmlFor="email">
-               {("AuthForm.label_3")}<Input type="email" name="email"></Input>
+               {("Email *")}<Input type="email" name="email"></Input>
               <FormError name="email" component="p" />
             </Label>
             <Label htmlFor="password">
-              {("AuthForm.label_2")}
+              {("Password *")}
               <Input
                 name="password"
                 type={showPassword ? 'true' : 'password'}

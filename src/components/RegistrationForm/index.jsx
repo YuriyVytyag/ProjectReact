@@ -56,18 +56,18 @@ export const RegistrationForm = () => {
           <FormReg autoComplete="off">
             <FormList>
               <FormItem>
-                <Label htmlFor="username">{('AuthForm.label_1')}</Label>
+                <Label htmlFor="username">{('Name *')}</Label>
                 <Input id="username" name="username" type="text" />
                 <FormError name="username" component="p" />
               </FormItem>
               <FormItem>
-                <Label htmlFor="email">{('AuthForm.label_3')}</Label>
+                <Label htmlFor="email">{('Email *')}</Label>
                 <Input id="email" name="email" type="text" />
                 <FormError name="email" component="p" />
               </FormItem>
 
               <FormItem>
-                <Label htmlFor="password">{('AuthForm.label_2')}</Label>
+                <Label htmlFor="password">{('Password *')}</Label>
                 <Input
                   id="password"
                   name="password"
