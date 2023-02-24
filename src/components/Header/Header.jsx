@@ -16,7 +16,6 @@ function Header() {
   }
 
   return (
-    <div>
     <header className={s.header}>
       <Link className={s.leftBlock} to={token ? '/diary' : '/'}>
         <Logo />
@@ -46,8 +45,7 @@ function Header() {
         </div>
       )}
     </header>
-    <Outlet/>
-    </div>
+
   );
 }
 

@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 
 const MainPage = () => {
   const isLoggedIn = useSelector(selectIsAuth);
-  console.log('isLoggedIn', isLoggedIn);
   return (
     <>
       <DailyCaloriesForm />

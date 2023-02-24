@@ -23,7 +23,7 @@ const currentUser = async () => {
 const dailyRateUserId = async userDataWithId => {
   return await axios.post(
     `/daily-rate/${userDataWithId.id}`,
-    userDataWithId.userData
+    userDataWithId.data
   );
 };
 

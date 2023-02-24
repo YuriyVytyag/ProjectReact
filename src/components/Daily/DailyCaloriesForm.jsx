@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { orange } from '@mui/material/colors';
 import { dailyRate } from 'redux/dailyRate/dailyRate-operations';
+import { dailyRateUserId } from 'redux/dailyDateUserId/dailyDateUserId-operations';
+import { selectIsAuth } from 'redux/auth/auth-selectors';
 import BasicModal from 'components/Modal/Modal';
 import * as yup from 'yup';
 import {
@@ -26,12 +28,13 @@ import {
   ButtonWrap,
 } from './DailyCaloriesForm.styled';
 
+
 let schema = yup.object().shape({
-  height: yup.number().required().positive(),
-  age: yup.number().required().positive(),
-  weight: yup.number().required().positive(),
-  desiredWeight: yup.number().required().positive(),
-  bloodType: yup.number().required(),
+  height: yup.number().positive().required(),
+  age: yup.number().positive().required(),
+  weight: yup.number().positive().required(),
+  desiredWeight: yup.number().positive().required(),
+  bloodType: yup.number(),
 });
 
 const CssTextField = styled(TextField)({
@@ -88,6 +91,12 @@ export const DailyCaloriesForm = () => {
   // console.log(daileRate);
   const dispatch = useDispatch();
   const [dailyData, setDailyData] = useState({});
+  const dailyWithId = useSelector(state => state.user.id)
+  console.log(dailyWithId);
+  const isLoggedIn = useSelector(selectIsAuth);
+  
+
+  //якщо кори зарег викликай функцію яка кладе id і велю, в іншому випадку модал вікно
 
   // const InitialValues = {
   //   height: daileRate ? daileRate.height : '',
@@ -104,23 +113,27 @@ export const DailyCaloriesForm = () => {
     bloodType: 1,
   };
 
+  
   const handleSubmit = (values, { resetForm }) => {
     const { bloodType, ...res } = values;
     const newFormData = {
       ...res,
       bloodType: Number(bloodType),
     };
-    console.log(newFormData);
     setDailyData(newFormData);
-
     localStorage.setItem('dailyRateData', JSON.stringify(newFormData));
-    dispatch(dailyRate(newFormData));
+    
+  //   isLoggedIn ? 
+  //  ( dispatch(dailyRateUserId({id})) )
+  //   :
+     dispatch(dailyRate(newFormData));
+      setOpenModal(!openModal)
     resetForm();
   };
 
   const handleCloseModal = () => {
     console.log(dailyData);
-    if (Object.values(dailyData).length !== 0) {
+    if (Object.values(dailyData).length !== 0) { //
       return setOpenModal(!openModal);
     }
     // else {

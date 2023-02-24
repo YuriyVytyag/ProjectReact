@@ -41,7 +41,7 @@ export default function BasicModal({open, onClose, setOpen}) {
     <div>
       <Modal
         open={open}
-        onClose={onClose}
+        // onClose={onClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
