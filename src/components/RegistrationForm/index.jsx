@@ -51,7 +51,7 @@ export const RegistrationForm = () => {
         validationSchema={RegisterSchema}
       >
         <Wrap>
-          <Title>{('header.signup2')}</Title>
+          <Title>{('Register')}</Title>
 
           <FormReg autoComplete="off">
             <FormList>
