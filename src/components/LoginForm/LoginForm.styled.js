@@ -10,25 +10,32 @@ export const FormLogIn = styled(Form)`
   @media screen and (min-width: 768px) {
     align-items: start;
     gap: 60px;
+    margin-left: 32px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-left: 16px;
   }
 `;
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  color: ${p => p.theme?.colors?.textFirst};
-  font-size: ${p => p.theme?.fontSizes?.s};
-  font-weight: ${p => p.theme?.fontWeights?.bold};
+  color: #9B9FAA;
+  font-size: 14px;
+  font-weight: 700;
   width: 280px;
   position: relative;
 `;
 
 export const Input = styled(Field)`
+  
   border: none;
   border-bottom: 1px solid #e0e0e0;
-  outline-color: ${p => p.theme?.colors?.accent};
+  outline-color: #FC842D;
   width: 100%;
   height: 20px;
+
   @media screen and (min-width: 768px) {
     max-width: 240px;
   }
