@@ -7,23 +7,21 @@ import CircularProgressWithLabel from 'components/Loader/Loader';
 import { useDispatch } from 'react-redux';
 import { refreshUser } from 'redux/auth/auth-operations';
 import { useEffect } from 'react';
-
-// import Calculator from 'pages/Calculator/Calculator';
 import Header from './components/Header/Header';
+// import Calculator from 'pages/Calculator/Calculator';
 // import RegistrationPage from './pages/RegistrationPage';
 // import Diary from 'pages/Diary/Diary';
 // import MainPage from 'pages/MainPage/MainPage';
-
 const MainPage = lazy(() => import('pages/MainPage/MainPage'));
 const Diary = lazy(() => import('pages/Diary/Diary'));
 const RegistrationPage = lazy(() => import('pages/RegistrationPage'));
 const Calculator = lazy(() => import('pages/Calculator/Calculator'));
 
 const App = () => {
-  const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(refreshUser())
-  }, [dispatch])
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
 
   return (
     <>
