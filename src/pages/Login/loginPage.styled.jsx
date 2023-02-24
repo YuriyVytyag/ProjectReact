@@ -13,10 +13,10 @@ export const LoginPage = styled.div`
     align-items: start;
     padding-top: 160px;
   }
-  
+
 `;
 
 export const TitleLogIn = styled.h1`
-  color: ${p => p.theme.colors.accent};
-  font-size: ${p => p.theme.fontSizes.s};
+  color: ${p => p.theme?.colors?.accent};
+  font-size: ${p => p.theme?.fontSizes?.s};
 `;

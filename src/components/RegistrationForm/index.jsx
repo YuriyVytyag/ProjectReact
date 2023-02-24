@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
-import register from 'redux/auth/auth-operations';
+import { register } from 'redux/auth/auth-operations';
 import { RegisterSchema } from 'utils/schemas/RegisterSchema';
-// import { ButtonLinkAuth } from 'components/Button';
+import { ButtonLinkAuth, ButtonAuth } from 'components/Button';
 import { Link } from 'react-router-dom';
 import {
   Title,
@@ -17,7 +17,6 @@ import {
   MessageErr,
 } from './RegistrationForm.styled';
 import { ShowPasswordButton } from 'components/Button/ShowPasswordButton';
-// import userSelector from 'redux/auth/auth-selectors';
 
 const FormError = ({ name }) => {
   return (
@@ -29,50 +28,46 @@ const FormError = ({ name }) => {
 };
 
 const initialValues = {
-  name: '',
+  username: '',
   email: '',
   password: '',
 };
 
 export const RegistrationForm = () => {
-  // const userSavedData = useSelector(userSelector.selectUserSavedData);
-
   const [showPassword, setShow] = useState(false);
   const handleClick = () => setShow(!showPassword);
   const dispatch = useDispatch();
 
-  // const handleSubmit = async ({ name, email, password }, { resetForm }) => {
-  //   userSavedData
-  //     ? await dispatch(register({ ...userSavedData, name, email, password }))
-  //     : await dispatch(register({ name, email, password }));
-  //   resetForm();
-  // };
+  const handleSubmit = async (values, { resetForm }) => {
+    await dispatch(register(values));
+    resetForm();
+  };
 
   return (
     <>
       <Formik
         initialValues={initialValues}
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         validationSchema={RegisterSchema}
       >
         <Wrap>
-          <Title>{("header.signup2")}</Title>
+          <Title>{('header.signup2')}</Title>
 
           <FormReg autoComplete="off">
             <FormList>
               <FormItem>
-                <Label htmlFor="name">{("AuthForm.label_1")}</Label>
-                <Input id="name" name="name" type="text" />
-                <FormError name="name" component="p" />
+                <Label htmlFor="username">{('AuthForm.label_1')}</Label>
+                <Input id="username" name="username" type="text" />
+                <FormError name="username" component="p" />
               </FormItem>
               <FormItem>
-                <Label htmlFor="email">{("AuthForm.label_3")}</Label>
+                <Label htmlFor="email">{('AuthForm.label_3')}</Label>
                 <Input id="email" name="email" type="text" />
                 <FormError name="email" component="p" />
               </FormItem>
 
               <FormItem>
-                <Label htmlFor="password">{("AuthForm.label_2")}</Label>
+                <Label htmlFor="password">{('AuthForm.label_2')}</Label>
                 <Input
                   id="password"
                   name="password"
@@ -86,9 +81,9 @@ export const RegistrationForm = () => {
               </FormItem>
             </FormList>
             <ButtonsContainer>
-            <button type='submit'>Registration</button>
+              <ButtonAuth text={('header.buttonReg')} />
               <Link to="/login">
-              <button type='submit'>Log In</button>
+                <ButtonLinkAuth text={('header.buttonLogin')} />
               </Link>
             </ButtonsContainer>
           </FormReg>
