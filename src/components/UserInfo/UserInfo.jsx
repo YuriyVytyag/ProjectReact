@@ -4,12 +4,12 @@ import s from '../UserInfo/UserInfo.module.css';
 import { logout } from '../../redux/auth/auth-operations';
 
 function UserInfo() {
-  const name = useSelector(state => state?.user?.username);
+  const name = useSelector(state => state.auth.user.username);
   const dispatch = useDispatch();
 
   return (
     <div className={s.infoBlock}>
-      <b>{name}</b>
+      <b style={{ fontWeight: '700' }}>{name}</b>
       <button
         className={s.btnExit}
         type="button"
