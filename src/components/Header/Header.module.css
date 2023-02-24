@@ -9,9 +9,6 @@
   margin-left: auto;
   margin-right: 80px;
 }
-.Navigation {
-  display: none;
-}
 
 @media screen and (max-width: 767px) {
   .header {
@@ -38,11 +35,24 @@
     justify-content: flex-start;
     align-items: flex-end;
   }
+  .UserInfo {
+    display: none;
+  }
 }
 
 /* ---------------------- <Burger menu> --------------------------- */
 
 @media screen and (max-width: 1279px) {
+  .leftBlock {
+    /* flex-basis: 50%; */
+    margin-right: auto;
+    white-space: nowrap;
+  }
+  .rightBlock {
+    /* flex-basis: 50%; */
+    margin-left: auto;
+    white-space: nowrap;
+  }
   .burger {
     position: fixed;
     top: 50px;
