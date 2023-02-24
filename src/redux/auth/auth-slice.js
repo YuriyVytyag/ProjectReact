@@ -13,6 +13,7 @@ const initialState = {
   user: {
     userName: '',
     email: '',
+    id:'',
   },
 };
 

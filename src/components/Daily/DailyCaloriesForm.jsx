@@ -1,8 +1,13 @@
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { orange } from '@mui/material/colors';
 import { dailyRate } from 'redux/dailyRate/dailyRate-operations';
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { dailyRateUserId } from 'redux/dailyDateUserId/dailyDateUserId-operations';
+import { selectIsAuth } from 'redux/auth/auth-selectors';
+import BasicModal from 'components/Modal/Modal';
+import * as yup from 'yup';
+import { selectUser } from 'redux/auth/auth-selectors';
 import {
   styled,
   useRadioGroup,
@@ -23,6 +28,14 @@ import {
   RightWrap,
   ButtonWrap,
 } from './DailyCaloriesForm.styled';
+
+let schema = yup.object().shape({
+  height: yup.number().positive().required(),
+  age: yup.number().positive().required(),
+  weight: yup.number().positive().required(),
+  desiredWeight: yup.number().positive().required(),
+  bloodType: yup.string(),
+});
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
@@ -69,7 +82,11 @@ function MyFormControlLabel(props) {
   );
 }
 
-export const DailyCaloriesForm = () => {
+const DailyCaloriesForm = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const isLoggedIn = useSelector(selectIsAuth);
   const InitialValues = {
     height: '',
     age: '',
@@ -78,25 +95,36 @@ export const DailyCaloriesForm = () => {
     bloodType: 1,
   };
 
-  const [formData, setFormData] = useState(InitialValues);
-
-  const dispatch = useDispatch();
-
-  const handleSubmit = async (values, { resetForm }) => {
-    const {bloodType, ...res} = values; 
+  const handleSubmit = (values, { resetForm }) => {
+  
+    const { bloodType, ...res } = values;
     const newFormData = {
-    ...res,
-    bloodType: Number(bloodType),
-   }
-    setFormData(newFormData);
-    dispatch(dailyRate(values))
+      ...res,
+      bloodType: Number(bloodType),
+    };
+    localStorage.setItem('dailyRateData', JSON.stringify(newFormData));
+    if(isLoggedIn) {
+      dispatch(dailyRateUserId({ id: user.id, data: newFormData }))
+    }else{
+      dispatch(dailyRate(newFormData));
+      setOpenModal(!openModal)
+    }
+    resetForm();
+  };
+
+  const handleCloseModal = () => {
+      setOpenModal(!openModal);
   };
 
   return (
     <FormWrapper>
       <Title>Calculate your daily calorie intake right now</Title>
-      <Formik initialValues={InitialValues} onSubmit={handleSubmit}>
-        {({ values, handleChange, handleBlur, setFieldValue }) => (
+      <Formik
+        initialValues={InitialValues}
+        onSubmit={handleSubmit}
+        validationSchema={schema}
+      >
+        {({ values, handleChange, handleBlur, errors }) => (
           <Form>
             <MainWrap>
               <LeftWrap>
@@ -143,33 +171,69 @@ export const DailyCaloriesForm = () => {
                   onChange={handleChange}
                 />
                 <RadioWraper>
-                <FormControl>
-                  <FormLabel id="demo-radio-buttons-group-label">
-                    Blood type*
-                  </FormLabel>
-                  <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="1"
-                    name="radio-buttons-group"
-                    row
-                  >
-                    <MyFormControlLabel value={1} label="1" onChange={handleChange} checked={values.bloodType === '1'} />
-                    <MyFormControlLabel value={2} label="2" onChange={handleChange} checked={values.bloodType === '2'} />
-                    <MyFormControlLabel value={3} label="3" onChange={handleChange} checked={values.bloodType === '3'} />
-                    <MyFormControlLabel value={4} label="4" onChange={handleChange} checked={values.bloodType === '4'} />
-                  </RadioGroup>
+                  <FormControl>
+                    <FormLabel
+                      id="demo-radio-buttons-group-label"
+                      sx={{ color: orange[600] }}
+                    >
+                      Blood type*
+                    </FormLabel>
+                    <RadioGroup
+                      aria-labelledby="demo-radio-buttons-group-label"
+                      defaultValue="1"
+                      name="bloodType"
+                      row
+                    >
+                      <MyFormControlLabel
+                        value={1}
+                        label="1"
+                        onChange={handleChange}
+                        checked={values.bloodType === '1'}
+                      />
+                      <MyFormControlLabel
+                        value={2}
+                        label="2"
+                        onChange={handleChange}
+                        checked={values.bloodType === '2'}
+                      />
+                      <MyFormControlLabel
+                        value={3}
+                        label="3"
+                        onChange={handleChange}
+                        checked={values.bloodType === '3'}
+                      />
+                      <MyFormControlLabel
+                        value={4}
+                        label="4"
+                        onChange={handleChange}
+                        checked={values.bloodType === '4'}
+                      />
+                    </RadioGroup>
                   </FormControl>
                 </RadioWraper>
               </RightWrap>
             </MainWrap>
             <ButtonWrap>
-              <FormButton type="submit" variant="contained">
+              <FormButton
+                type="submit"
+                variant="contained"
+              >
                 Start losing weight
               </FormButton>
             </ButtonWrap>
           </Form>
         )}
       </Formik>
+      {openModal && (
+        <BasicModal
+          open={openModal}
+          onClose={handleCloseModal}
+          setOpen={setOpenModal}
+        />
+      )}
     </FormWrapper>
   );
 };
+
+
+export default DailyCaloriesForm;
