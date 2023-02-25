@@ -20,10 +20,9 @@ const currentUser = async () => {
   return data;
 };
 
-const dailyRateUserId = async userDataWithId => {
+const dailyRateUserId = async (id, data) => {
   return await axios.post(
-    `/daily-rate/${userDataWithId.id}`,
-    userDataWithId.userData
+    `/daily-rate/${id}`, data
   );
 };
 
@@ -31,8 +30,10 @@ const getInfoForDay = async date => {
   return await axios.post('/day/info', date);
 };
 
-const searchProducts = async search => {
-  return await axios.get(`/product/?search=${search}`);
+export const searchProducts = async query => {
+   const response = await axios.get(`/product?search=${query}`);
+   console.log(response.data);
+   return response.data
 };
 
 const addEatenProduct = async params => {
@@ -55,7 +56,6 @@ const API = {
   currentUser,
   dailyRateUserId,
   getInfoForDay,
-  searchProducts,
   addEatenProduct,
   deleteEatenProduct,
   refresh,

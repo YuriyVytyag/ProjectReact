@@ -7,7 +7,7 @@ export const DesctopImg = styled.img`
     position: absolute;
     top: 0px;
     right: 0;
-    z-index: -1;
+    z-index: -2;
   }
 `;
 
@@ -18,6 +18,6 @@ export const TabletImg = styled.img`
     position: absolute;
     bottom: 0;
     right: 0;
-    z-index: -1;
+    z-index: -2;
   }
 `;

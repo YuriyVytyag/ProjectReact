@@ -1,5 +1,5 @@
 import { RightSideBar } from 'components/RightSideBar/RightSideBar';
-import { DailyCaloriesForm } from 'components/Daily/DailyCaloriesForm';
+import DailyCaloriesForm from 'components/Daily/DailyCaloriesForm';
 import styled from '@emotion/styled';
 
 const Calculator = () => {

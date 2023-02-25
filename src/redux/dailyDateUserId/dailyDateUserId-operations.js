@@ -4,10 +4,12 @@ import API from 'services.js/API';
 
 export const dailyRateUserId = createAsyncThunk(
   'dailyRateUserId',
-  async (userData, thunkApi) => {
+  async ( userData, thunkApi) => {
+    const {id, data} = userData;
     try {
-      const { data } = await API.dailyRateUserId(userData);
-      return data;
+      const  res  = await API.dailyRateUserId(id, data);
+      console.log(res.data);
+      return res.data;
     } catch (err) {
       thunkApi.rejectWithValue();
     }

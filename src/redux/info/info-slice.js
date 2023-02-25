@@ -5,15 +5,15 @@ const initialState = {
   dayId: '',
   date: '',
   eatenProducts: [],
-  daySummary: {},
-  dailyRate: '',
-  kcalConsumed: '',
-  kcalLeft: '',
-  percentsOfDailyRate: '',
+  // daySummary: {},
+  // dailyRate: '',
+  // kcalConsumed: '',
+  // kcalLeft: '',
+  // percentsOfDailyRate: '',
 };
 
 const info = createSlice({
-  name: 'infoUser',
+  name: 'day',
   initialState,
   extraReducers: builder => {
     builder.addCase(infoUser.fulfilled, (state, action) => {
