@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { infoUser } from './info-operations';
+import { addEatenProduct, deleteEatenProduct, getInfoForDay } from './info-operations';
 
 const initialState = {
   dayId: '',
-  date: '',
+  date: null,
   eatenProducts: [],
-  // daySummary: {},
+  eatenProductId:'',
+  daySummary: {},
   // dailyRate: '',
   // kcalConsumed: '',
   // kcalLeft: '',
@@ -15,20 +16,35 @@ const initialState = {
 const info = createSlice({
   name: 'day',
   initialState,
-  extraReducers: builder => {
-    builder.addCase(infoUser.fulfilled, (state, action) => {
-      state.date = action.payload?.date;
-      // state.eatenProducts = action.payload?.eatenProducts;
-      state.eatenProducts = action.payload?.eatenProducts?.reverse();
+  reducers: {
+    getSelectDate: (state, action) => {
+      state.date = action.payload;
+    },
+    getSelectEatenProductId: (state, action) => {
+      state.eatenProductId = action.payload;
+    },
+  },
+  extraReducers:{
+    [addEatenProduct.fulfilled](state, action){
+      state.eatenProducts.push(action.payload);
+    },
+    [deleteEatenProduct.fulfilled](state, action){
+      state.eatenProducts = state.eatenProducts.filter(
+        product => product.id !== action.payload.productId
+      );
+    },
+    [getInfoForDay.fulfilled](state, action){
+      if (!action.payload.eatenProducts) {
+        state.eatenProducts = [];
+        return;
+      }
+      state.eatenProducts = [...action.payload.eatenProducts];
       state.daySummary = action.payload?.daySummary;
       state.dayId = action.payload?.id;
-      //======
-      state.kcalLeft = action.payload?.kcalLeft;
-      state.kcalConsumed = action.payload?.kcalConsumed;
-      state.dailyRate = action.payload?.dailyRate;
-      state.percentsOfDailyRate = action.payload?.percentsOfDailyRate;
-    });
+    }
   },
 });
 
 export const infoReducer = info.reducer;
+
+export const { getSelectDate, getSelectEatenProductId } = info.actions;

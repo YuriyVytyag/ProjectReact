@@ -1,0 +1,1 @@
+export const selectDay = state => state.dayInfo.date

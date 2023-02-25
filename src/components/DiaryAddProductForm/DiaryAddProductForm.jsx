@@ -1,60 +1,64 @@
 import css from '../DiaryAddProductForm/DiaryAddProductForm.module.css';
-// import TextField from '@mui/material/TextField';
-// import Autocomplete from '@mui/material/Autocomplete';
-// import { useState, useEffect } from 'react';
-// import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { object, string, number } from 'yup';
-// import { searchProducts } from 'services.js/API';
-// import { useSearchParams } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { selectUser } from 'redux/auth/auth-selectors';
-
+import { searchProducts } from 'services.js/API';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUser } from 'redux/auth/auth-selectors';
+import { selectDay } from 'redux/info/info-selectors';
+import { addEatenProduct } from 'redux/info/info-operations';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 let productSchema = object({
-  product: string().required(),
-  weight: number().required().positive().integer(),
+  product: string(),
+  weight: number(),
 });
 
 export default function DiaryAddProductForm() {
-  // const user = useSelector(selectUser);
-  // const dispatch = useDispatch;
-  // const [products, setProducts] = useState([]);
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const search = searchParams.get('search') ?? '';
-
-  // console.log(user);
+  const dispatch = useDispatch();
+  const [query, setQuery] = useState('');
+  const [products, setProducts] = useState([]);
+  const day = useSelector(selectDay);
 
   const initialValue = {
-    product: '',
+    id: null,
     weight: '',
   };
 
-  const handleChange = event => {
-    // dispatch();
-    const search = event.target.value;
-    // console.log(search);
-    return search;
+  const handleChangeInput = event => {
+    setQuery(event.target.value);
   };
 
-  // useEffect(() => {
-  //   // if (search === '') {
-  //   //   return;
-  //   // }
-  //   console.log('hagl');
-  //   searchProducts('Меланж').then(response => {
-  //     console.log(response);
-  //     const products = response[0].title ? response : [];
-  //     console.log(products);
-  //     // setProducts(response.data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    if (query === '') {
+      return;
+    }
+    searchProducts(query).then(response => {
+      const products = response[0].title ? response : [];
+      setProducts(products);
+    });
+  }, [query]);
 
-  const handleSubmit = (value, { resetForm }) => {
-    // const newProduct = {
-    //   product: value.product,
-    //   weight: value.weight,
-    // };
-    // console.log(value);
+  const handleAutocomplete = products.map(product => {
+    return {
+      label: product.title.ua,
+      id: product._id,
+    };
+  });
+
+  const handleSubmit = (values, { resetForm }) => {
+    const productData = {
+      date: day.date,
+      productId: values.id,
+      weight: Number(values.weight),
+    };
+    if (!productData.productId) {
+      resetForm();
+      return;
+    }
+    dispatch(addEatenProduct(productData));
     resetForm();
   };
 
@@ -64,44 +68,52 @@ export default function DiaryAddProductForm() {
       onSubmit={handleSubmit}
       validationSchema={productSchema}
     >
-      <Form autoComplete="off">
-        {/* <Autocomplete
-          id="auto-complete"
-          sx={{ width: 300 }}
-          autoComplete
-          includeInputInList
-          renderInput={params => (
-            <TextField
-              {...params}
-              onChange={handleChange}
-              label="Enter product name"
-              variant="standard"
-              name="product"
-            />
-          )}
-        /> */}
-        <Field
-          className={css.input__product}
-          name="product"
-          type="text"
-          placeholder="Enter product name"
-          onChange={handleChange}
-        />
-        {/* <ErrorMessage name="product" component="div" /> */}
-        <Field
-          className={css.input__grams}
-          name="weight"
-          type="number"
-          placeholder="Grams"
-        />
-        {/* <ErrorMessage name="weight" component="div" /> */}
-        <button className={css.button__mobile} type="submit">
-          Add
-        </button>
-        <button className={css.button} type="submit">
-          +
-        </button>
-      </Form>
+      {({ values, handleChange, setFieldValue }) => (
+        <Form>
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={handleAutocomplete}
+            sx={{ width: 300 }}
+            value={values.name}
+            onChange={(event, newValue) => {
+              handleChange(event);
+              if (!newValue) {
+                return;
+              }
+              setFieldValue('id', newValue.id);
+            }}
+            renderInput={params => (
+              <TextField
+                type="input"
+                onChange={handleChangeInput}
+                {...params}
+                label="Enter product name"
+                name="name"
+                id="name"
+              />
+            )}
+          />
+          <TextField
+            id="grams"
+            label="Grams"
+            type="input"
+            variant="standard"
+            name="weight"
+            value={values.weight}
+            onChange={handleChange}
+          />
+          <button className={css.button__mobile} type="submit">
+            Add
+          </button>
+          {/* <button className={css.button} type="submit">
+            +
+          </button> */}
+          <Fab type="submit" color="primary" aria-label="add">
+            <AddIcon />
+          </Fab>
+        </Form>
+      )}
     </Formik>
   );
 }
