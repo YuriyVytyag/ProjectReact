@@ -55,7 +55,9 @@ export const Input = styled(Field)`
 `;
 
 export const ErrorText = styled.p`
-  color: red;
-  width: 100%;
-  text-align: justify;
+color: red;
+width: 250px;
+text-align: justify;
+font-weight: 700;
+font-size: 14px;
 `;

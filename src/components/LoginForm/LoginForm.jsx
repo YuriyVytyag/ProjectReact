@@ -22,12 +22,12 @@ const FormError = ({ name }) => {
 const schema = yup.object().shape({
   email: yup
     .string()
-    .email('validationRegisterForm.label2')
-    .required('validationDiaryForm.label4'),
+    .email('Invalid type of email')
+    .required('Email is required'),
   password: yup
     .string()
-    .min(3, 'validationDiaryForm.label3')
-    .required('validationDiaryForm.label4'),
+    .min(8, 'Invalid type of password ( password must be at least of 8 characters)')
+    .required('Password is required'),
 });
 
 const initialValues = {
