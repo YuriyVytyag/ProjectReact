@@ -1,16 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addEatenProduct, deleteEatenProduct, getInfoForDay } from './info-operations';
+import {
+  addEatenProduct,
+  deleteEatenProduct,
+  getInfoForDay,
+} from './info-operations';
+
+const handleRejected = (state, action) => {
+  state.error = action.payload;
+};
 
 const initialState = {
   dayId: '',
   date: null,
   eatenProducts: [],
-  eatenProductId:'',
   daySummary: {},
-  // dailyRate: '',
-  // kcalConsumed: '',
-  // kcalLeft: '',
-  // percentsOfDailyRate: '',
+  error: null,
 };
 
 const info = createSlice({
@@ -20,20 +24,22 @@ const info = createSlice({
     getSelectDate: (state, action) => {
       state.date = action.payload;
     },
-    getSelectEatenProductId: (state, action) => {
-      state.eatenProductId = action.payload;
-    },
   },
-  extraReducers:{
-    [addEatenProduct.fulfilled](state, action){
-      state.eatenProducts.push(action.payload);
+  extraReducers: {
+    [addEatenProduct.fulfilled](state, action) {
+      state.eatenProducts.push(action.payload.eatenProduct);
+      state.error = null;
     },
-    [deleteEatenProduct.fulfilled](state, action){
-      state.eatenProducts = state.eatenProducts.filter(
-        product => product.id !== action.payload.productId
+    [addEatenProduct.rejected]: handleRejected,
+    [deleteEatenProduct.fulfilled](state, action) {
+      const index = state.eatenProducts.findIndex(
+        eatenProduct => eatenProduct.id === action.payload.id
       );
+      state.eatenProducts.splice(index, 1);
+      state.error = null;
     },
-    [getInfoForDay.fulfilled](state, action){
+    [deleteEatenProduct.rejected]: handleRejected,
+    [getInfoForDay.fulfilled](state, action) {
       if (!action.payload.eatenProducts) {
         state.eatenProducts = [];
         return;
@@ -41,10 +47,12 @@ const info = createSlice({
       state.eatenProducts = [...action.payload.eatenProducts];
       state.daySummary = action.payload?.daySummary;
       state.dayId = action.payload?.id;
-    }
+      state.error = null;
+    },
+    [getInfoForDay.rejected]: handleRejected,
   },
 });
 
 export const infoReducer = info.reducer;
 
-export const { getSelectDate, getSelectEatenProductId } = info.actions;
+export const { getSelectDate } = info.actions;

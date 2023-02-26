@@ -32,7 +32,6 @@ const getInfoForDay = async date => {
 
 export const searchProducts = async query => {
    const response = await axios.get(`/product?search=${query}`);
-   console.log(response.data);
    return response.data
 };
 
