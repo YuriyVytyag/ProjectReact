@@ -8,6 +8,7 @@ import {
   selectKcal,
   selectNotAllowedProducts,
 } from 'redux/dailyRate/dailyRate-selectors';
+
 // import { useState, useEffect } from 'react';
 // import { useDispatch } from 'react-redux';
 // import { dailyRate } from 'redux/dailyRate/dailyRate-operations';
@@ -21,6 +22,7 @@ import {
   Calories,
   BackIcon,
   BackBtn,
+  Container,
 } from './Modal.styled';
 
 const style = {
@@ -41,7 +43,7 @@ export default function BasicModal({ open, onClose, setOpen }) {
   //  }, [dispatch])
 
   return (
-    <div>
+    <Container>
       <Modal
         open={open}
         // onClose={onClose}
@@ -75,6 +77,6 @@ export default function BasicModal({ open, onClose, setOpen }) {
           </a>
         </Wrapper>
       </Modal>
-    </div>
+    </Container>
   );
 }
