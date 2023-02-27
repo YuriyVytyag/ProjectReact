@@ -1,9 +1,13 @@
-import { Bar, List, Item, Title } from './RightSideBar.styled';
+import { Bar, List, Item, Title, FoodWrap } from './RightSideBar.styled';
 import { selectDay, selectDaySummary } from 'redux/info/info-selectors';
+import { selectDailyRateProducts } from 'redux/dailyDateUserId/dailyDateUserId-selectors';
 import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
 
 export const RightSideBar = () => {
+  const notProducts = useSelector(selectDailyRateProducts);
+  const products = notProducts.slice(0,4)
+  
   const { kcalConsumed, kcalLeft, dailyRate, percentsOfDailyRate } =
     useSelector(selectDaySummary);
   const selectedDay = useSelector(selectDay);
@@ -46,14 +50,14 @@ export const RightSideBar = () => {
           </Item>
         </List>
       </div>
-      <div>
-        <Title className="headerBottom">Food not recommended</Title>
+      <FoodWrap>
+        <Title>Food not recommended</Title>
         <List>
-          {/* {Array.isArray(food) && food.map(meal => 
-            <Item>{meal.title}</Item>
-          )} */}
+          {products.map(product => 
+            <Item key={product}>{product}</Item>
+          )}
         </List>
-      </div>
+      </FoodWrap>
     </Bar>
   );
 };
