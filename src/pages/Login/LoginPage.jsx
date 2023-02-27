@@ -1,4 +1,4 @@
-//import { AuthBackground } from 'components/AuthBackground';
+import { AuthBackground } from 'components/AuthBackground';
 import Loader from 'components/Loader/Loader';
 import { FormLogin } from 'components/LoginForm/LoginForm';
 import { useAuth } from 'hooks/useAuth';
@@ -9,6 +9,7 @@ const Login = () => {
 
   return (
     <>
+    <AuthBackground/>
     <LoginPage>
       <TitleLogIn>LOG IN</TitleLogIn>
       <FormLogin />

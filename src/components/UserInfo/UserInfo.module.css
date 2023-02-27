@@ -8,6 +8,8 @@
 .btnExit {
   margin-left: 40px;
   border: none;
+  font-weight: 700;
+  font-size: 14px;
   background-color: transparent;
   color: #9b9faa;
   cursor: pointer;

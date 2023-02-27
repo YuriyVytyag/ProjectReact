@@ -4,9 +4,10 @@ import { Field, Form } from 'formik';
 
 export const MessageErr = styled.p`
   color: red;
-  width: 300px;
+  width: 250px;
   text-align: justify;
   font-weight: 700;
+  font-size: 14px;
 `;
 
 export const Wrap = styled.div`
@@ -67,6 +68,7 @@ export const Label = styled.label`
   color: #9b9faa;
   letter-spacing: 0.04em;
   font-weight: 700;
+  font-size: 14px;
 `;
 
 export const Input = styled(Field)`

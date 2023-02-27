@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const LoginPage = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: baseline;
   padding-top: 40px;
   width: 100%;
 

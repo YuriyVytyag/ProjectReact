@@ -10,6 +10,7 @@
 
 body {
   margin: 0;
+  padding: 0 15px;
   font-family: 'Verdana', sans-serif;
   font-style: normal;
   -webkit-font-smoothing: antialiased;

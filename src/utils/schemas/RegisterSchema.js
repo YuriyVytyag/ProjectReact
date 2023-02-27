@@ -3,16 +3,16 @@ import * as yup from 'yup';
 export const RegisterSchema = yup.object().shape({
   username: yup
     .string()
-    .min(3, 'validationRegisterForm.label1')
+    .min(3, 'The name must be at least 3 to 15 characters')
     .max(15)
-    .required('validationDiaryForm.label4'),
+    .required('Name is required'),
   email: yup
     .string()
-    .email('notify.alert3')
-    .required('validationDiaryForm.label4'),
+    .email('Invalid type of email')
+    .required('Email is required'),
   password: yup
     .string()
-    .min(8, 'validationRegisterForm.label3')
+    .min(8, 'Invalid type of password ( password must be at least of 8 characters)')
     .max(100)
-    .required('validationDiaryForm.label4'),
+    .required('Password is required'),
 });
