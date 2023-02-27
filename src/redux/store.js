@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import dailyRateReducer  from './dailyRate/dailyRate-slice';
 import { userReducer } from './user/user-slice';
 import { authReducer } from './auth/auth-slice';
+import { infoReducer } from './info/info-slice';
 import storage from 'redux-persist/lib/storage';
 import {
   persistReducer,
@@ -24,6 +25,7 @@ export const store = configureStore({
   reducer: {
     user: userReducer,
     daily: dailyRateReducer,
+    dayInfo: infoReducer,
     auth: persistReducer(authConfig, authReducer),
   },
   middleware: getDefaultMiddleware =>
