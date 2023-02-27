@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ProjectReact/static/css/main.4ee15ef0.css",
-    "main.js": "/ProjectReact/static/js/main.1ce4acb9.js",
+    "main.js": "/ProjectReact/static/js/main.06afcf94.js",
     "static/js/852.2f1ee102.chunk.js": "/ProjectReact/static/js/852.2f1ee102.chunk.js",
     "static/css/184.f40acf1a.chunk.css": "/ProjectReact/static/css/184.f40acf1a.chunk.css",
     "static/js/184.d20fa5e3.chunk.js": "/ProjectReact/static/js/184.d20fa5e3.chunk.js",
@@ -29,7 +29,7 @@
     "static/media/shadow_tablet.webp": "/ProjectReact/static/media/shadow_tablet.d053f80ec7277dc8dfe9.webp",
     "index.html": "/ProjectReact/index.html",
     "main.4ee15ef0.css.map": "/ProjectReact/static/css/main.4ee15ef0.css.map",
-    "main.1ce4acb9.js.map": "/ProjectReact/static/js/main.1ce4acb9.js.map",
+    "main.06afcf94.js.map": "/ProjectReact/static/js/main.06afcf94.js.map",
     "852.2f1ee102.chunk.js.map": "/ProjectReact/static/js/852.2f1ee102.chunk.js.map",
     "184.f40acf1a.chunk.css.map": "/ProjectReact/static/css/184.f40acf1a.chunk.css.map",
     "184.d20fa5e3.chunk.js.map": "/ProjectReact/static/js/184.d20fa5e3.chunk.js.map",
@@ -42,6 +42,6 @@
   },
   "entrypoints": [
     "static/css/main.4ee15ef0.css",
-    "static/js/main.1ce4acb9.js"
+    "static/js/main.06afcf94.js"
   ]
 }
