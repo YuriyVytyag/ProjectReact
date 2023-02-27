@@ -80,3 +80,10 @@ export const Item = styled.li`
   @media screen and (min-width: 1280px) {
   }
 `;
+
+export const FoodWrap = styled.div`
+  margin-top: 20px;
+  @media screen and (min-width: 768px) {
+    margin-top: 0;
+  }
+`

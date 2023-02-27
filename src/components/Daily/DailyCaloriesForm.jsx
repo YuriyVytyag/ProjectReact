@@ -25,7 +25,7 @@ import {
   ButtonWrap,
   CssTextField,
   StyledFormLabel,
-  StyledFormControlLabel
+  StyledFormControlLabel,
 } from './DailyCaloriesForm.styled';
 
 let schema = yup.object().shape({
@@ -60,21 +60,20 @@ function MyFormControlLabel(props) {
 }
 
 const DailyCaloriesForm = () => {
-  const dailyData = localStorage.getItem('dailyRateData');
-  console.log(dailyData);
-
+  const [localStorageData] = useState(
+    JSON.parse(localStorage.getItem('dailyRateData'))
+  );
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  console.log(user);
   const isLoggedIn = useSelector(selectIsAuth);
 
   const InitialValues = {
-    height: dailyData.height || '',  
-    age: dailyData.age || '',
-    weight: dailyData.weight || '',
-    desiredWeight: dailyData.desiredWeight || '',
-    bloodType: dailyData.bloodType || 1,
+    height: localStorageData ? localStorageData.height : '',
+    age: localStorageData ? localStorageData.age : '',
+    weight: localStorageData ? localStorageData.weight : '',
+    desiredWeight: localStorageData ? localStorageData.desiredWeight : '',
+    bloodType: localStorageData ? localStorageData.bloodType : '1',
   };
 
   const handleSubmit = (values, { resetForm }) => {
@@ -158,30 +157,30 @@ const DailyCaloriesForm = () => {
                     </StyledFormLabel>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      defaultValue="1"
+                      value={values.bloodType}
                       name="bloodType"
                       row
                     >
                       <MyFormControlLabel
-                        value={1}
+                        value="1"
                         label="1"
                         onChange={handleChange}
                         checked={values.bloodType === '1'}
                       />
                       <MyFormControlLabel
-                        value={2}
+                        value="2"
                         label="2"
                         onChange={handleChange}
                         checked={values.bloodType === '2'}
                       />
                       <MyFormControlLabel
-                        value={3}
+                        value="3"
                         label="3"
                         onChange={handleChange}
                         checked={values.bloodType === '3'}
                       />
                       <MyFormControlLabel
-                        value={4}
+                        value="4"
                         label="4"
                         onChange={handleChange}
                         checked={values.bloodType === '4'}

@@ -1,7 +1,5 @@
 import DailyCaloriesForm from 'components/Daily/DailyCaloriesForm';
-import ImgDesctop from '../../assets/images/destop.png';
-import ImgTab from '../../assets/images/tablet.png';
-import { DesctopImg, TabletImg } from './MainPage.styled';
+import { AuthBackground } from 'components/AuthBackground';
 import { selectIsAuth } from 'redux/auth/auth-selectors';
 import { useSelector } from 'react-redux';
 
@@ -12,8 +10,7 @@ const MainPage = () => {
       <DailyCaloriesForm />
       {!isLoggedIn && (
         <>
-          <DesctopImg src={ImgDesctop} />
-          <TabletImg src={ImgTab} />
+        <AuthBackground/>
         </>
       )}
     </>

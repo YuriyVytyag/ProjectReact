@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import dailyRateReducer  from './dailyRate/dailyRate-slice';
+import { dailyRateUserIdReducer } from './dailyDateUserId/dailyDateUserId-slice';
 import { userReducer } from './user/user-slice';
 import { authReducer } from './auth/auth-slice';
 import { infoReducer } from './info/info-slice';
@@ -25,6 +26,7 @@ export const store = configureStore({
   reducer: {
     user: userReducer,
     daily: dailyRateReducer,
+    dailyRate: dailyRateUserIdReducer,
     dayInfo: infoReducer,
     auth: persistReducer(authConfig, authReducer),
   },
