@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { Button } from '@mui/material';
+import { Button, FormLabel, TextField, FormControlLabel } from '@mui/material';
+import { orange } from '@mui/material/colors';
 
 export const FormWrapper = styled.div`
   padding-left: 20px;
@@ -71,9 +72,35 @@ export const RightWrap = styled.div`
 export const ButtonWrap = styled.div`
   display: flex;
   justify-content: center;
-  /* position: absolute;
-  z-index: -5; */
   @media (min-width: 768px) {
     justify-content: flex-start;
   }
 `;
+
+export const CssTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: 'orange',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: 'orange',
+  },
+  '& .MuiOutlinedInput-root': {
+    '&.Mui-focused fieldset': {
+      borderColor: 'orange',
+    },
+  },
+});
+
+export const StyledFormControlLabel = styled(props => (
+  <FormControlLabel {...props} />
+))(({ checked }) => ({
+  '.MuiFormControlLabel-label': checked && {
+    color: orange[600],
+  },
+}));
+
+export const StyledFormLabel = styled(FormLabel)({
+  '&.MuiFormLabel-root.Mui-focused': {
+    color: orange[600],
+  },
+});

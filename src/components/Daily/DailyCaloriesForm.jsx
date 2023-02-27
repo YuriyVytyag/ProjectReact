@@ -1,21 +1,17 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Formik, Form } from 'formik';
-import { orange } from '@mui/material/colors';
 import { dailyRate } from 'redux/dailyRate/dailyRate-operations';
 import { dailyRateUserId } from 'redux/dailyDateUserId/dailyDateUserId-operations';
 import { selectIsAuth } from 'redux/auth/auth-selectors';
 import BasicModal from 'components/Modal/Modal';
 import * as yup from 'yup';
+import { Formik, Form } from 'formik';
 import { selectUser } from 'redux/auth/auth-selectors';
+import { orange } from '@mui/material/colors';
 import {
-  styled,
   useRadioGroup,
   Radio,
   RadioGroup,
-  FormControlLabel,
-  FormLabel,
-  TextField,
   FormControl,
 } from '@mui/material';
 import {
@@ -27,6 +23,9 @@ import {
   LeftWrap,
   RightWrap,
   ButtonWrap,
+  CssTextField,
+  StyledFormLabel,
+  StyledFormControlLabel
 } from './DailyCaloriesForm.styled';
 
 let schema = yup.object().shape({
@@ -36,28 +35,6 @@ let schema = yup.object().shape({
   desiredWeight: yup.number().positive().required(),
   bloodType: yup.string(),
 });
-
-const CssTextField = styled(TextField)({
-  '& label.Mui-focused': {
-    color: 'orange',
-  },
-  '& .MuiInput-underline:after': {
-    borderBottomColor: 'orange',
-  },
-  '& .MuiOutlinedInput-root': {
-    '&.Mui-focused fieldset': {
-      borderColor: 'orange',
-    },
-  },
-});
-
-const StyledFormControlLabel = styled(props => <FormControlLabel {...props} />)(
-  ({ checked }) => ({
-    '.MuiFormControlLabel-label': checked && {
-      color: orange[600],
-    },
-  })
-);
 
 function MyFormControlLabel(props) {
   const radioGroup = useRadioGroup();
@@ -83,37 +60,41 @@ function MyFormControlLabel(props) {
 }
 
 const DailyCaloriesForm = () => {
+  const dailyData = localStorage.getItem('dailyRateData');
+  console.log(dailyData);
+
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  console.log(user);
   const isLoggedIn = useSelector(selectIsAuth);
+
   const InitialValues = {
-    height: '',
-    age: '',
-    weight: '',
-    desiredWeight: '',
-    bloodType: 1,
+    height: dailyData.height || '',  
+    age: dailyData.age || '',
+    weight: dailyData.weight || '',
+    desiredWeight: dailyData.desiredWeight || '',
+    bloodType: dailyData.bloodType || 1,
   };
 
   const handleSubmit = (values, { resetForm }) => {
-  
     const { bloodType, ...res } = values;
     const newFormData = {
       ...res,
       bloodType: Number(bloodType),
     };
     localStorage.setItem('dailyRateData', JSON.stringify(newFormData));
-    if(isLoggedIn) {
-      dispatch(dailyRateUserId({ id: user.id, data: newFormData }))
-    }else{
+    if (isLoggedIn) {
+      dispatch(dailyRateUserId({ id: user.id, data: newFormData }));
+    } else {
       dispatch(dailyRate(newFormData));
-      setOpenModal(!openModal)
+      setOpenModal(!openModal);
     }
     resetForm();
   };
 
   const handleCloseModal = () => {
-      setOpenModal(!openModal);
+    setOpenModal(!openModal);
   };
 
   return (
@@ -124,7 +105,7 @@ const DailyCaloriesForm = () => {
         onSubmit={handleSubmit}
         validationSchema={schema}
       >
-        {({ values, handleChange, handleBlur, errors }) => (
+        {({ values, handleChange, handleBlur }) => (
           <Form>
             <MainWrap>
               <LeftWrap>
@@ -151,7 +132,7 @@ const DailyCaloriesForm = () => {
                 <CssTextField
                   required
                   name="weight"
-                  label="weight"
+                  label="Weight"
                   type="number"
                   variant="standard"
                   value={values.weight || ''}
@@ -163,7 +144,7 @@ const DailyCaloriesForm = () => {
                 <CssTextField
                   required
                   name="desiredWeight"
-                  label="desiredWeight"
+                  label="Desired weight"
                   type="number"
                   variant="standard"
                   value={values.desiredWeight || ''}
@@ -172,12 +153,9 @@ const DailyCaloriesForm = () => {
                 />
                 <RadioWraper>
                   <FormControl>
-                    <FormLabel
-                      id="demo-radio-buttons-group-label"
-                      sx={{ color: orange[600] }}
-                    >
+                    <StyledFormLabel id="demo-radio-buttons-group-label">
                       Blood type*
-                    </FormLabel>
+                    </StyledFormLabel>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       defaultValue="1"
@@ -214,10 +192,7 @@ const DailyCaloriesForm = () => {
               </RightWrap>
             </MainWrap>
             <ButtonWrap>
-              <FormButton
-                type="submit"
-                variant="contained"
-              >
+              <FormButton type="submit" variant="contained">
                 Start losing weight
               </FormButton>
             </ButtonWrap>
@@ -234,6 +209,5 @@ const DailyCaloriesForm = () => {
     </FormWrapper>
   );
 };
-
 
 export default DailyCaloriesForm;

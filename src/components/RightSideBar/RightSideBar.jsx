@@ -1,6 +1,7 @@
 import { Bar, List, Item, Title } from './RightSideBar.styled'
 
 export const RightSideBar = ({date, left, consumed, rate, normal, food}) => {
+  
   return (
     <Bar>
       <div>
@@ -25,7 +26,7 @@ export const RightSideBar = ({date, left, consumed, rate, normal, food}) => {
         </List>
       </div>
       <div>
-        <Title className="headerBottom">Food not recommended</Title>
+        <Title>Food not recommended</Title>
         <List>
           {Array.isArray(food) && food.map(meal => 
             <Item>{meal.title}</Item>
