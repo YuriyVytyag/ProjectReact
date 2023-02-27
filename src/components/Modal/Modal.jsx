@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Modal } from '@mui/material';
+import { Link } from 'react-router-dom';
+
 import { Close as CloseIcon } from '@mui/icons-material';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { useSelector } from 'react-redux';
@@ -70,9 +72,9 @@ export default function BasicModal({ open, onClose, setOpen }) {
               return <li key={product}>{product}</li>;
             })}
           </ol>
-          <a href="/register">
+          <Link to="/register">
             <StyledButton>Start losing weight</StyledButton>
-          </a>
+          </Link>
         </Wrapper>
       </Modal>
     </Container>
