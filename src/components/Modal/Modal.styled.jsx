@@ -1,6 +1,13 @@
 import styled from '@emotion/styled';
 import { Box, Typography, Button } from '@mui/material';
 
+export const Container = styled.div`
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
 export const Wrapper = styled(Box)`
   width: 320px;
   display: flex;

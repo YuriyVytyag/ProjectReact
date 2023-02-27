@@ -1,4 +1,3 @@
-import CircularProgressWithLabel from '../Loader/Loader';
 import * as React from 'react';
 import { Modal } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
@@ -8,6 +7,7 @@ import {
   selectKcal,
   selectNotAllowedProducts,
 } from 'redux/dailyRate/dailyRate-selectors';
+
 // import { useState, useEffect } from 'react';
 // import { useDispatch } from 'react-redux';
 // import { dailyRate } from 'redux/dailyRate/dailyRate-operations';
@@ -21,6 +21,7 @@ import {
   Calories,
   BackIcon,
   BackBtn,
+  Container,
 } from './Modal.styled';
 
 const style = {
@@ -41,7 +42,7 @@ export default function BasicModal({ open, onClose, setOpen }) {
   //  }, [dispatch])
 
   return (
-    <div>
+    <Container>
       <Modal
         open={open}
         // onClose={onClose}
@@ -49,7 +50,6 @@ export default function BasicModal({ open, onClose, setOpen }) {
         aria-describedby="modal-modal-description"
       >
         <Wrapper sx={style}>
-          <CircularProgressWithLabel />
           <BackIcon>
             <BackBtn type="button" onClick={handleClose}>
               <KeyboardReturnIcon />
@@ -75,6 +75,6 @@ export default function BasicModal({ open, onClose, setOpen }) {
           </a>
         </Wrapper>
       </Modal>
-    </div>
+    </Container>
   );
 }

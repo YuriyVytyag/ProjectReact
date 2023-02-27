@@ -8,10 +8,8 @@ import { useDispatch } from 'react-redux';
 import { refreshUser } from 'redux/auth/auth-operations';
 import { useEffect } from 'react';
 import Header from './components/Header/Header';
-// import Calculator from 'pages/Calculator/Calculator';
-// import RegistrationPage from './pages/RegistrationPage';
-// import Diary from 'pages/Diary/Diary';
-// import MainPage from 'pages/MainPage/MainPage';
+import Error from 'pages/ErrorPage/ErrorPage';
+
 const MainPage = lazy(() => import('pages/MainPage/MainPage'));
 const Diary = lazy(() => import('pages/Diary/Diary'));
 const RegistrationPage = lazy(() => import('pages/RegistrationPage'));
@@ -56,6 +54,7 @@ const App = () => {
               }
             />
           </Route>
+          <Route element={<Error />} path="*" />
         </Routes>
       </Suspense>
     </>
