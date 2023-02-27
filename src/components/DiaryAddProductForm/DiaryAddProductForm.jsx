@@ -1,4 +1,3 @@
-import css from '../DiaryAddProductForm/DiaryAddProductForm.module.css';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useState, useEffect } from 'react';
@@ -6,11 +5,10 @@ import { Formik, Form, Field } from 'formik';
 import { object, string, number } from 'yup';
 import { searchProducts } from 'services.js/API';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUser } from 'redux/auth/auth-selectors';
 import { selectDay } from 'redux/info/info-selectors';
 import { addEatenProduct } from 'redux/info/info-operations';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
+import { FormStyled, AddButton, AddButtonDesktop, StyledField, StyledAutocomplete} from './DiaryAddProductForm.styled';
+
 let productSchema = object({
   product: string(),
   weight: number(),
@@ -69,12 +67,12 @@ export default function DiaryAddProductForm() {
       validationSchema={productSchema}
     >
       {({ values, handleChange, setFieldValue }) => (
-        <Form>
-          <Autocomplete
+        <FormStyled>
+          <StyledAutocomplete
             disablePortal
             id="combo-box-demo"
             options={handleAutocomplete}
-            sx={{ width: 300 }}
+            sx={{ width: 240 }}
             value={values.name}
             onChange={(event, newValue) => {
               handleChange(event);
@@ -94,25 +92,22 @@ export default function DiaryAddProductForm() {
               />
             )}
           />
-          <TextField
+          <StyledField
             id="grams"
-            label="Grams"
+            placeholder="Grams"
             type="input"
             variant="standard"
             name="weight"
             value={values.weight}
             onChange={handleChange}
           />
-          <button className={css.button__mobile} type="submit">
+          <AddButton type="submit">
             Add
-          </button>
-          {/* <button className={css.button} type="submit">
-            +
-          </button> */}
-          <Fab type="submit" color="primary" aria-label="add">
-            <AddIcon />
-          </Fab>
-        </Form>
+          </AddButton>
+          <AddButtonDesktop type="submit">
+          +
+        </AddButtonDesktop>
+        </FormStyled>
       )}
     </Formik>
   );

@@ -29,7 +29,7 @@ export default function DiaryDateCalendar() {
   };
 
   return (
-    <Box>
+    <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePickerStyled
           label={now}
@@ -40,6 +40,6 @@ export default function DiaryDateCalendar() {
           renderInput={props => <TextField {...props} />}
         />
       </LocalizationProvider>
-    </Box>
+    </>
   );
 }
