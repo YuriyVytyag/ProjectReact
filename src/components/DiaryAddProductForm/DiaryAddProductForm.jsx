@@ -1,13 +1,18 @@
 import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 import { useState, useEffect } from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik } from 'formik';
 import { object, string, number } from 'yup';
 import { searchProducts } from 'services.js/API';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDay } from 'redux/info/info-selectors';
 import { addEatenProduct } from 'redux/info/info-operations';
-import { FormStyled, AddButton, AddButtonDesktop, StyledField, StyledAutocomplete} from './DiaryAddProductForm.styled';
+import {
+  FormStyled,
+  AddButton,
+  AddButtonDesktop,
+  StyledField,
+  StyledAutocomplete,
+} from './DiaryAddProductForm.styled';
 
 let productSchema = object({
   product: string(),
@@ -101,12 +106,8 @@ export default function DiaryAddProductForm() {
             value={values.weight}
             onChange={handleChange}
           />
-          <AddButton type="submit">
-            Add
-          </AddButton>
-          <AddButtonDesktop type="submit">
-          +
-        </AddButtonDesktop>
+          <AddButton type="submit">Add</AddButton>
+          <AddButtonDesktop type="submit">+</AddButtonDesktop>
         </FormStyled>
       )}
     </Formik>

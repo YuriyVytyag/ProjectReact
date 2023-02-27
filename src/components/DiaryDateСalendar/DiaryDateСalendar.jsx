@@ -1,4 +1,4 @@
-import { Box, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -9,19 +9,19 @@ import { useDispatch } from 'react-redux';
 import { getInfoForDay } from 'redux/info/info-operations';
 
 export default function DiaryDateCalendar() {
-  const now = dayjs().format('DD.MM.YYYY')
-  const dispatch = useDispatch()
+  const now = dayjs().format('DD.MM.YYYY');
+  const dispatch = useDispatch();
   const [date, setDate] = useState(now);
 
-  useEffect(()=>{
-    const formatNow = dayjs().format('YYYY-MM-DD')
-    const dateObject = {date: formatNow}
+  useEffect(() => {
+    const formatNow = dayjs().format('YYYY-MM-DD');
+    const dateObject = { date: formatNow };
     dispatch(getInfoForDay(dateObject));
     dispatch(getSelectDate(dateObject));
-  }, [dispatch])
+  }, [dispatch]);
 
   const handleChange = newDate => {
-    const newDateFormat = newDate.format('YYYY-MM-DD')
+    const newDateFormat = newDate.format('YYYY-MM-DD');
     setDate(newDateFormat);
     const dateObject = { date: newDateFormat };
     dispatch(getInfoForDay(dateObject));
@@ -33,7 +33,7 @@ export default function DiaryDateCalendar() {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePickerStyled
           label={now}
-          inputFormat='DD.MM.YYYY'
+          inputFormat="DD.MM.YYYY"
           minDate={dayjs('2023-01-01')}
           value={date}
           onChange={handleChange}
