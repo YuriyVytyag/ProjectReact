@@ -9,6 +9,7 @@ const ErrorWrapper = styled.div`
 `;
 const ErrorText = styled.p`
   margin-bottom: 20px;
+  font-size: 30px;
 `;
 const ErrorLink = styled(Link)`
   display: flex;
