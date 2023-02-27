@@ -1,4 +1,3 @@
-import CircularProgressWithLabel from '../Loader/Loader';
 import * as React from 'react';
 import { Modal } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
@@ -51,7 +50,6 @@ export default function BasicModal({ open, onClose, setOpen }) {
         aria-describedby="modal-modal-description"
       >
         <Wrapper sx={style}>
-          <CircularProgressWithLabel />
           <BackIcon>
             <BackBtn type="button" onClick={handleClose}>
               <KeyboardReturnIcon />
