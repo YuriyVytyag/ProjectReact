@@ -4,7 +4,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 export const FormStyled = styled(Form)`
   @media (max-width: 767px) {
-    display: flex;
+    display: none;
     flex-direction: column;
   }
   @media (min-width: 768px) {

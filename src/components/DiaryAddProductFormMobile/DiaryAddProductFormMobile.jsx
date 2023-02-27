@@ -1,3 +1,5 @@
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { useState, useEffect } from 'react';
 import { Formik } from 'formik';
@@ -6,14 +8,26 @@ import { searchProducts } from 'services.js/API';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDay } from 'redux/info/info-selectors';
 import { addEatenProduct } from 'redux/info/info-operations';
-import { FormStyled, AddButton, AddButtonDesktop, StyledField, StyledAutocomplete} from './DiaryAddProductForm.styled';
+import { FormStyled, AddButton, AddButtonDesktop, StyledField, StyledAutocomplete} from '../DiaryAddProductForm/DiaryAddProductForm.styled';
 
 let productSchema = object({
-  product: string(),
-  weight: number(),
-});
+    product: string(),
+    weight: number(),
+  });
 
-export default function DiaryAddProductForm() {
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  height: '100%',
+  width: '100%',
+  bgcolor: 'background.paper',
+  p: 4,
+};
+
+export default function DiaryProductFormMobile ({open, onClose, setOpen}) {
+  const handleClose = () => setOpen(!open);
   const dispatch = useDispatch();
   const [query, setQuery] = useState('');
   const [products, setProducts] = useState([]);
@@ -60,7 +74,15 @@ export default function DiaryAddProductForm() {
   };
 
   return (
-    <Formik
+    <div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <Formik
       initialValues={initialValue}
       onSubmit={handleSubmit}
       validationSchema={productSchema}
@@ -109,5 +131,9 @@ export default function DiaryAddProductForm() {
         </FormStyled>
       )}
     </Formik>
+        </Box>
+      </Modal>
+    </div>
   );
 }
+

@@ -2,13 +2,19 @@ import styled from 'styled-components';
 import { DatePicker } from '@mui/x-date-pickers';
 
 export const DatePickerStyled = styled(DatePicker)`
-.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root.Mui-error {
+  .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root.Mui-error {
     color: #212121;
-}
+  }
   .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
     border: none;
   }
   .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+    @media (max-width: 767px) {
+      font-family: 'Verdana';
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 22px;
+    }
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     font-weight: 700;
     font-size: 34px;
@@ -17,17 +23,33 @@ export const DatePickerStyled = styled(DatePicker)`
   }
 
   .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+    @media (max-width: 767px) {
+      font-family: 'Verdana';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 22px;
+    }
     width: 219px;
     font-family: 'Verdana';
-font-style: normal;
-font-weight: 700;
-font-size: 34px;
-line-height: 41px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 41px;
   }
   .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    @media (max-width: 767px) {
+    }
     min-width: 219px;
   }
   .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+    @media (max-width: 767px) {
+      font-family: 'Verdana';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 22px;
+    }
     font: inherit;
     letter-spacing: inherit;
     color: currentColor;
